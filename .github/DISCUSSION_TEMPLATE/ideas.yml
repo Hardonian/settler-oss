@@ -1,0 +1,42 @@
+title: "[Idea] "
+labels: ["enhancement", "discussion"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: Describe your idea or suggestion
+      placeholder: I think it would be great if...
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: How would this help you or others?
+      placeholder: This would help me/us when...
+    validations:
+      required: true
+  - type: dropdown
+    id: sdk
+    attributes:
+      label: Which SDK(s)?
+      multiple: true
+      options:
+        - TypeScript/Node.js SDK
+        - Python SDK
+        - Go SDK
+        - Ruby SDK
+        - React SDK
+        - CLI
+        - All SDKs
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered other approaches?
+      placeholder: I've also thought about...
+    validations:
+      required: false

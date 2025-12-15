@@ -1,0 +1,27 @@
+title: "[General] "
+labels: ["question", "discussion"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question or Topic
+      description: What would you like to discuss?
+      placeholder: Your question or discussion topic here...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Provide any relevant context
+      placeholder: What SDK are you using? What's your use case?
+    validations:
+      required: false
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: Any other information that might be helpful
+      placeholder: Links, examples, etc.
+    validations:
+      required: false

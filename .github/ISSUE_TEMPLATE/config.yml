@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/shardie-github/settler-oss/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📚 Documentation
+    url: https://docs.settler.dev
+    about: Check our documentation for guides and API reference
+  - name: 🔒 Security Issue
+    url: https://github.com/shardie-github/settler-oss/security/advisories/new
+    about: Report a security vulnerability (please do not create a public issue)

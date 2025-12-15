@@ -1,0 +1,41 @@
+title: "[Q&A] "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What's your question?
+      placeholder: Ask your question here...
+    validations:
+      required: true
+  - type: dropdown
+    id: sdk
+    attributes:
+      label: Which SDK?
+      options:
+        - TypeScript/Node.js SDK
+        - Python SDK
+        - Go SDK
+        - Ruby SDK
+        - React SDK
+        - CLI
+        - General/All
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?
+      description: Describe what you've already tried or researched
+      placeholder: I've tried... I've checked...
+    validations:
+      required: false
+  - type: textarea
+    id: code
+    attributes:
+      label: Code Example (if applicable)
+      description: Share relevant code snippets
+      render: typescript
+    validations:
+      required: false

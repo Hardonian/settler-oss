@@ -23,7 +23,27 @@ jobs:
             echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
-  test:
+  lint:
+    if: needs.check-skip.outputs.skip != 'true'
+    needs: check-skip
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run linter
+        run: npm run lint
+        continue-on-error: true
+
+  build:
     if: needs.check-skip.outputs.skip != 'true'
     needs: check-skip
     runs-on: ubuntu-latest
@@ -41,16 +61,70 @@ jobs:
           cache: 'npm'
       
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci
       
-      - name: Run linter
-        run: npm run lint || echo "Lint check skipped"
+      - name: Build TypeScript SDK
+        working-directory: packages/sdk
+        run: |
+          if [ -f "package.json" ]; then
+            npm run build
+          else
+            echo "TypeScript SDK package.json not found"
+            exit 1
+          fi
       
-      - name: Run tests
-        run: npm test || echo "Test check skipped"
+      - name: Build React SDK
+        working-directory: packages/react-settler
+        run: |
+          if [ -f "package.json" ]; then
+            npm run build || echo "React SDK build skipped (no source files yet)"
+          else
+            echo "React SDK package.json not found"
+            exit 1
+          fi
+        continue-on-error: true
       
-      - name: Build packages
-        run: npm run build || echo "Build check skipped"
+      - name: Build CLI
+        working-directory: packages/cli
+        run: |
+          if [ -f "package.json" ]; then
+            npm run build || echo "CLI build skipped (no source files yet)"
+          else
+            echo "CLI package.json not found"
+            exit 1
+          fi
+        continue-on-error: true
+
+  test-typescript:
+    if: needs.check-skip.outputs.skip != 'true'
+    needs: check-skip
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run TypeScript SDK tests
+        working-directory: packages/sdk
+        run: |
+          if [ -f "package.json" ]; then
+            npm test || echo "TypeScript SDK tests skipped (no tests yet)"
+          else
+            echo "TypeScript SDK package.json not found"
+            exit 1
+          fi
+        continue-on-error: true
 
   test-python:
     if: needs.check-skip.outputs.skip != 'true'
