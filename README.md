@@ -119,6 +119,18 @@ This repository contains multiple packages:
 - **[`packages/react-settler`](./packages/react-settler)** - React components
 - **[`packages/cli`](./packages/cli)** - Command-line interface
 
+## 🔄 Auto-Sync from Private Repo
+
+This repository is automatically synced from the private Settler repository. Content marked as `OSS_PUBLIC` in the private repo is automatically ported here.
+
+**For maintainers**: See [AUTO_SYNC_SETUP.md](./AUTO_SYNC_SETUP.md) for setup instructions.
+
+**How it works**:
+1. Commit changes to private repo (via Cursor or any method)
+2. GitHub Actions automatically detects OSS_PUBLIC content
+3. OSS content is automatically synced to this public repo
+4. No manual CLI work needed!
+
 ## 📚 Documentation
 
 - [API Reference](https://docs.settler.dev/api)
@@ -126,6 +138,7 @@ This repository contains multiple packages:
 - [Examples](./examples)
 - [Contributing](./CONTRIBUTING.md)
 - [Security Policy](./SECURITY.md)
+- [Auto-Sync Setup](./AUTO_SYNC_SETUP.md)
 
 ## 🛠️ Development
 
