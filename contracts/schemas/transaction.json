@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://settler.dev/schemas/transaction.json",
+  "title": "Transaction",
+  "description": "A financial transaction record",
+  "type": "object",
+  "required": ["id", "amount", "date"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique transaction identifier",
+      "examples": ["txn_1234567890", "TXN-2024-001"]
+    },
+    "amount": {
+      "type": "number",
+      "description": "Transaction amount",
+      "examples": [100.50, -50.25]
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Transaction date (ISO 8601)",
+      "examples": ["2024-01-15"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Transaction description",
+      "examples": ["Payment for services", "Refund"]
+    }
+  },
+  "additionalProperties": true
+}

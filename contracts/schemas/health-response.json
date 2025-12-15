@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://settler.dev/schemas/health-response.json",
+  "title": "HealthResponse",
+  "description": "API health check response",
+  "type": "object",
+  "required": ["status", "version"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["healthy", "unhealthy"],
+      "description": "Health status"
+    },
+    "version": {
+      "type": "string",
+      "description": "API version",
+      "examples": ["1.0.0"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Current server timestamp"
+    }
+  }
+}

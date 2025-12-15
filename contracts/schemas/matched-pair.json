@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://settler.dev/schemas/matched-pair.json",
+  "title": "MatchedPair",
+  "description": "A matched pair of transactions",
+  "type": "object",
+  "required": ["source", "target", "confidence"],
+  "properties": {
+    "source": {
+      "$ref": "transaction.json"
+    },
+    "target": {
+      "$ref": "transaction.json"
+    },
+    "confidence": {
+      "type": "number",
+      "description": "Match confidence score (0.0 to 1.0)",
+      "minimum": 0,
+      "maximum": 1,
+      "examples": [0.95, 1.0]
+    }
+  }
+}

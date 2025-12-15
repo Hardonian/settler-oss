@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://settler.dev/schemas/reconciliation-summary.json",
+  "title": "ReconciliationSummary",
+  "description": "Summary statistics for a reconciliation operation",
+  "type": "object",
+  "required": ["totalSource", "totalTarget", "matched", "unmatchedSource", "unmatchedTarget"],
+  "properties": {
+    "totalSource": {
+      "type": "integer",
+      "description": "Total number of source transactions",
+      "minimum": 0
+    },
+    "totalTarget": {
+      "type": "integer",
+      "description": "Total number of target transactions",
+      "minimum": 0
+    },
+    "matched": {
+      "type": "integer",
+      "description": "Number of matched pairs",
+      "minimum": 0
+    },
+    "unmatchedSource": {
+      "type": "integer",
+      "description": "Number of unmatched source transactions",
+      "minimum": 0
+    },
+    "unmatchedTarget": {
+      "type": "integer",
+      "description": "Number of unmatched target transactions",
+      "minimum": 0
+    }
+  }
+}

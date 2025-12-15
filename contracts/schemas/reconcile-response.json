@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://settler.dev/schemas/reconcile-response.json",
+  "title": "ReconcileResponse",
+  "description": "Response from reconciliation operation",
+  "type": "object",
+  "required": ["matched", "unmatched", "summary"],
+  "properties": {
+    "matched": {
+      "type": "array",
+      "items": {
+        "$ref": "matched-pair.json"
+      },
+      "description": "Successfully matched transaction pairs"
+    },
+    "unmatched": {
+      "type": "object",
+      "required": ["source", "target"],
+      "properties": {
+        "source": {
+          "type": "array",
+          "items": {
+            "$ref": "transaction.json"
+          },
+          "description": "Unmatched source transactions"
+        },
+        "target": {
+          "type": "array",
+          "items": {
+            "$ref": "transaction.json"
+          },
+          "description": "Unmatched target transactions"
+        }
+      }
+    },
+    "summary": {
+      "$ref": "reconciliation-summary.json"
+    }
+  }
+}

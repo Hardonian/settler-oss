@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://settler.dev/schemas/webhook-envelope.json",
+  "title": "WebhookEnvelope",
+  "description": "Standard webhook event envelope",
+  "type": "object",
+  "required": ["event", "timestamp"],
+  "properties": {
+    "event": {
+      "type": "string",
+      "description": "Event type identifier",
+      "examples": ["reconciliation.completed", "sync.started", "sync.failed"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Event timestamp"
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Event payload"
+    },
+    "webhookId": {
+      "type": "string",
+      "description": "Webhook subscription ID"
+    }
+  }
+}

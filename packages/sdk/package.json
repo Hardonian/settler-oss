@@ -18,6 +18,11 @@
   ],
   "author": "Scott Hardie",
   "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^20.0.0",

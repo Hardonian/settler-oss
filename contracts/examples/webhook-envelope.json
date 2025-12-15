@@ -1,0 +1,10 @@
+{
+  "event": "reconciliation.completed",
+  "timestamp": "2024-01-15T10:30:00Z",
+  "data": {
+    "reconciliationId": "rec_1234567890",
+    "matched": 2,
+    "unmatched": 0
+  },
+  "webhookId": "wh_1234567890"
+}

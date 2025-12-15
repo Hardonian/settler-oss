@@ -271,6 +271,55 @@ While the **Settler Protocol is 100% free and open-source**, we offer **enterpri
 
 ---
 
+## 🔗 Protocol Compatibility & Contract Surface
+
+The Settler Protocol maintains a **stable contract surface** that ensures compatibility between:
+- **OSS Repository** (this repo) - Open-source SDKs and API specification
+- **Settler Platform** (private) - Managed SaaS implementation
+
+### Contract Surface
+
+The contract surface is defined in [`/contracts/`](./contracts/) and includes:
+
+- **API Endpoints**: `/v1/reconcile`, `/v1/sync`, `/v1/health`
+- **Request/Response Types**: All payload schemas (JSON Schema + OpenAPI)
+- **Error Format**: Standard error envelope structure
+- **Webhook Format**: Standard webhook event envelope
+- **SDK Method Signatures**: Public SDK methods and their types
+
+### Versioning
+
+Contract versions follow [Semantic Versioning](https://semver.org/):
+- **MAJOR** (X.0.0): Breaking API changes
+- **MINOR** (0.X.0): New endpoints, optional fields (backward-compatible)
+- **PATCH** (0.0.X): Bug fixes, clarifications
+
+Current contract version: **1.0.0** (see [`contracts/CONTRACT_VERSION`](./contracts/CONTRACT_VERSION))
+
+### Compatibility Guarantees
+
+✅ **OSS SDKs** work with both self-hosted and managed Settler Platform APIs  
+✅ **API contracts** remain stable across versions  
+✅ **Type definitions** are generated from schemas for consistency  
+✅ **Automated checks** prevent drift between OSS and Platform
+
+### Verifying Compatibility
+
+```bash
+# Validate contracts
+npm run contracts:check
+
+# Check for boundary violations
+npm run check-boundaries
+
+# Check for secret leaks
+npm run secret-leak:check
+```
+
+**[📋 Contract Documentation](./contracts/README.md)** • **[🔒 Drift Prevention Report](./DRIFT-PREVENTION-REPORT.md)**
+
+---
+
 ## 🏠 Self-Hosting
 
 The Settler Protocol is **100% self-hostable**. Deploy on your infrastructure, own your data.

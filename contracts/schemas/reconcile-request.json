@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://settler.dev/schemas/reconcile-request.json",
+  "title": "ReconcileRequest",
+  "description": "Request to reconcile transactions between source and target",
+  "type": "object",
+  "required": ["source", "target"],
+  "properties": {
+    "source": {
+      "type": "array",
+      "items": {
+        "$ref": "transaction.json"
+      },
+      "description": "Source transactions to reconcile"
+    },
+    "target": {
+      "type": "array",
+      "items": {
+        "$ref": "transaction.json"
+      },
+      "description": "Target transactions to reconcile against"
+    },
+    "rules": {
+      "$ref": "matching-rules.json",
+      "description": "Optional matching rules configuration"
+    }
+  }
+}

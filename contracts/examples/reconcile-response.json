@@ -1,0 +1,45 @@
+{
+  "matched": [
+    {
+      "source": {
+        "id": "txn_001",
+        "amount": 100.50,
+        "date": "2024-01-15",
+        "description": "Payment for services"
+      },
+      "target": {
+        "id": "txn_001",
+        "amount": 100.50,
+        "date": "2024-01-15",
+        "description": "Payment for services"
+      },
+      "confidence": 1.0
+    },
+    {
+      "source": {
+        "id": "txn_002",
+        "amount": 200.00,
+        "date": "2024-01-16",
+        "description": "Refund"
+      },
+      "target": {
+        "id": "txn_002",
+        "amount": 200.00,
+        "date": "2024-01-16",
+        "description": "Refund"
+      },
+      "confidence": 1.0
+    }
+  ],
+  "unmatched": {
+    "source": [],
+    "target": []
+  },
+  "summary": {
+    "totalSource": 2,
+    "totalTarget": 2,
+    "matched": 2,
+    "unmatchedSource": 0,
+    "unmatchedTarget": 0
+  }
+}

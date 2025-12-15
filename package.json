@@ -13,6 +13,8 @@
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present && tsc --noEmit --project packages/protocol/tsconfig.json --project packages/shared/tsconfig.json --project packages/enterprise/tsconfig.json",
     "check-boundaries": "tsx scripts/check-boundaries.ts",
+    "contracts:check": "tsx scripts/validate-contracts.ts",
+    "secret-leak:check": "tsx scripts/check-secrets.ts",
     "clean": "npm run clean --workspaces --if-present && rm -rf node_modules",
     "prepare": "npm run build"
   },

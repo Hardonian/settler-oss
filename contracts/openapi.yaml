@@ -1,0 +1,443 @@
+openapi: 3.0.3
+info:
+  title: Settler Protocol API
+  description: |
+    Open-source API specification for Settler reconciliation platform.
+    This API is self-hostable and MIT licensed.
+  version: 1.0.0
+  contact:
+    name: Settler Support
+    email: support@settler.dev
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://api.settler.dev/v1
+    description: Production API (Managed SaaS)
+  - url: http://localhost:3000/v1
+    description: Self-hosted API (Development)
+
+tags:
+  - name: Reconciliation
+    description: Transaction reconciliation operations
+  - name: Synchronization
+    description: Data synchronization operations
+  - name: Health
+    description: System health and status
+
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Health check endpoint
+      description: Returns the health status of the API
+      operationId: getHealth
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '503':
+          description: API is unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /reconcile:
+    post:
+      tags:
+        - Reconciliation
+      summary: Reconcile transactions
+      description: |
+        Matches transactions from source and target systems based on configurable rules.
+        Returns matched pairs and unmatched transactions.
+      operationId: reconcile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReconcileRequest'
+      responses:
+        '200':
+          description: Reconciliation completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReconcileResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /sync:
+    post:
+      tags:
+        - Synchronization
+      summary: Synchronize data
+      description: |
+        Synchronizes data between source and target systems based on configuration.
+      operationId: sync
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncRequest'
+      responses:
+        '200':
+          description: Synchronization completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for authentication
+
+  schemas:
+    Transaction:
+      type: object
+      required:
+        - id
+        - amount
+        - date
+      properties:
+        id:
+          type: string
+          description: Unique transaction identifier
+          example: "txn_1234567890"
+        amount:
+          type: number
+          format: double
+          description: Transaction amount
+          example: 100.50
+        date:
+          type: string
+          format: date
+          description: Transaction date (ISO 8601)
+          example: "2024-01-15"
+        description:
+          type: string
+          description: Transaction description
+          example: "Payment for services"
+      additionalProperties: true
+      description: |
+        Transaction object. Must include id, amount, and date.
+        Additional fields are allowed for extensibility.
+
+    MatchingRules:
+      type: object
+      properties:
+        tolerance:
+          type: number
+          format: double
+          description: Amount tolerance for matching (default: 0.0)
+          example: 0.01
+          minimum: 0
+        dateRange:
+          type: integer
+          description: Date range tolerance in days (default: 0)
+          example: 1
+          minimum: 0
+        fields:
+          type: array
+          items:
+            type: string
+          description: Specific fields to match on
+          example: ["id", "amount", "date"]
+      description: Configuration for transaction matching rules
+
+    ReconcileRequest:
+      type: object
+      required:
+        - source
+        - target
+      properties:
+        source:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+          description: Source transactions to reconcile
+        target:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+          description: Target transactions to reconcile against
+        rules:
+          $ref: '#/components/schemas/MatchingRules'
+          description: Optional matching rules configuration
+
+    MatchedPair:
+      type: object
+      required:
+        - source
+        - target
+        - confidence
+      properties:
+        source:
+          $ref: '#/components/schemas/Transaction'
+        target:
+          $ref: '#/components/schemas/Transaction'
+        confidence:
+          type: number
+          format: double
+          description: Match confidence score (0.0 to 1.0)
+          example: 0.95
+          minimum: 0
+          maximum: 1
+
+    ReconciliationSummary:
+      type: object
+      required:
+        - totalSource
+        - totalTarget
+        - matched
+        - unmatchedSource
+        - unmatchedTarget
+      properties:
+        totalSource:
+          type: integer
+          description: Total number of source transactions
+          example: 100
+          minimum: 0
+        totalTarget:
+          type: integer
+          description: Total number of target transactions
+          example: 95
+          minimum: 0
+        matched:
+          type: integer
+          description: Number of matched pairs
+          example: 90
+          minimum: 0
+        unmatchedSource:
+          type: integer
+          description: Number of unmatched source transactions
+          example: 10
+          minimum: 0
+        unmatchedTarget:
+          type: integer
+          description: Number of unmatched target transactions
+          example: 5
+          minimum: 0
+
+    ReconcileResponse:
+      type: object
+      required:
+        - matched
+        - unmatched
+        - summary
+      properties:
+        matched:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchedPair'
+          description: Successfully matched transaction pairs
+        unmatched:
+          type: object
+          required:
+            - source
+            - target
+          properties:
+            source:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transaction'
+              description: Unmatched source transactions
+            target:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transaction'
+              description: Unmatched target transactions
+        summary:
+          $ref: '#/components/schemas/ReconciliationSummary'
+
+    SyncConfig:
+      type: object
+      required:
+        - direction
+      properties:
+        direction:
+          type: string
+          enum:
+            - source-to-target
+            - target-to-source
+            - bidirectional
+          description: Synchronization direction
+        filters:
+          type: object
+          additionalProperties: true
+          description: Optional filters for synchronization
+
+    SyncRequest:
+      type: object
+      required:
+        - source
+        - target
+        - config
+      properties:
+        source:
+          type: string
+          description: Source system identifier or endpoint
+          example: "postgresql://localhost/db1"
+        target:
+          type: string
+          description: Target system identifier or endpoint
+          example: "postgresql://localhost/db2"
+        config:
+          $ref: '#/components/schemas/SyncConfig'
+
+    SyncError:
+      type: object
+      required:
+        - transaction
+        - reason
+      properties:
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+        reason:
+          type: string
+          description: Error reason
+          example: "Connection timeout"
+
+    SyncResponse:
+      type: object
+      required:
+        - synced
+        - errors
+      properties:
+        synced:
+          type: integer
+          description: Number of successfully synced transactions
+          example: 150
+          minimum: 0
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyncError'
+          description: List of synchronization errors
+
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - version
+      properties:
+        status:
+          type: string
+          enum:
+            - healthy
+            - unhealthy
+          example: "healthy"
+        version:
+          type: string
+          description: API version
+          example: "1.0.0"
+        timestamp:
+          type: string
+          format: date-time
+          description: Current server timestamp
+          example: "2024-01-15T10:30:00Z"
+
+    ErrorEnvelope:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: "INVALID_REQUEST"
+            message:
+              type: string
+              description: Human-readable error message
+              example: "Invalid transaction data"
+            details:
+              type: object
+              additionalProperties: true
+              description: Additional error details
+        requestId:
+          type: string
+          description: Request correlation ID
+          example: "req_1234567890"
+        timestamp:
+          type: string
+          format: date-time
+          description: Error timestamp
+          example: "2024-01-15T10:30:00Z"
+
+    WebhookEnvelope:
+      type: object
+      required:
+        - event
+        - timestamp
+      properties:
+        event:
+          type: string
+          description: Event type identifier
+          example: "reconciliation.completed"
+        timestamp:
+          type: string
+          format: date-time
+          description: Event timestamp
+          example: "2024-01-15T10:30:00Z"
+        data:
+          type: object
+          additionalProperties: true
+          description: Event payload
+        webhookId:
+          type: string
+          description: Webhook subscription ID
+          example: "wh_1234567890"
+
+security:
+  - ApiKeyAuth: []

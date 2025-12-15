@@ -1,0 +1,35 @@
+{
+  "source": [
+    {
+      "id": "txn_001",
+      "amount": 100.50,
+      "date": "2024-01-15",
+      "description": "Payment for services"
+    },
+    {
+      "id": "txn_002",
+      "amount": 200.00,
+      "date": "2024-01-16",
+      "description": "Refund"
+    }
+  ],
+  "target": [
+    {
+      "id": "txn_001",
+      "amount": 100.50,
+      "date": "2024-01-15",
+      "description": "Payment for services"
+    },
+    {
+      "id": "txn_002",
+      "amount": 200.00,
+      "date": "2024-01-16",
+      "description": "Refund"
+    }
+  ],
+  "rules": {
+    "tolerance": 0.01,
+    "dateRange": 1,
+    "fields": ["id", "amount", "date"]
+  }
+}

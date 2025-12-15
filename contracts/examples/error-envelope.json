@@ -1,0 +1,12 @@
+{
+  "error": {
+    "code": "INVALID_REQUEST",
+    "message": "Invalid transaction data",
+    "details": {
+      "field": "amount",
+      "reason": "Amount must be a number"
+    }
+  },
+  "requestId": "req_1234567890",
+  "timestamp": "2024-01-15T10:30:00Z"
+}
