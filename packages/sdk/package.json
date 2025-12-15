@@ -1,0 +1,26 @@
+{
+  "name": "@settler/sdk",
+  "version": "0.1.0",
+  "description": "Official Node.js and TypeScript SDK for Settler",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "settler",
+    "reconciliation",
+    "sdk",
+    "typescript"
+  ],
+  "author": "Scott Hardie",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

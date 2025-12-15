@@ -1,0 +1,42 @@
+{
+  "name": "settler-oss",
+  "version": "0.1.0",
+  "description": "Settler Open-Source SDKs and Tools - Official SDKs for Node.js, Python, Go, Ruby, React, and CLI",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "clean": "npm run clean --workspaces && rm -rf node_modules",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shardie-github/settler-oss.git"
+  },
+  "keywords": [
+    "settler",
+    "reconciliation",
+    "financial-api",
+    "sdk",
+    "typescript",
+    "python",
+    "go",
+    "ruby",
+    "react",
+    "open-source"
+  ],
+  "author": "Scott Hardie",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}

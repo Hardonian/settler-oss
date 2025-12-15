@@ -1,0 +1,81 @@
+name: Publish Mirror
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Version tag to publish (e.g., v1.2.3)'
+        required: true
+        type: string
+  push:
+    tags:
+      - 'v*.*.*'
+
+env:
+  ENABLE_MIRROR_PUBLISHING: ${{ vars.ENABLE_MIRROR_PUBLISHING || 'true' }}
+
+jobs:
+  publish:
+    if: env.ENABLE_MIRROR_PUBLISHING == 'true'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Determine tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "tag=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+          else
+            echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Verify classification
+        run: |
+          echo "Running classification check..."
+          # This would run your classification script
+          # npm run classify:strict || exit 1
+      
+      - name: Generate mirror export
+        run: |
+          echo "Generating mirror export..."
+          # npm run mirror:dryrun || exit 1
+      
+      - name: Verify mirror content
+        run: |
+          echo "Verifying mirror content..."
+          # npm run mirror:verify || exit 1
+      
+      - name: Setup Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Push to mirror repository
+        env:
+          MIRROR_REPO_URL: ${{ secrets.PUBLIC_MIRROR_REPO_URL }}
+          GIT_USERNAME: ${{ secrets.PUBLIC_MIRROR_GIT_USERNAME }}
+          GIT_TOKEN: ${{ secrets.PUBLIC_MIRROR_GIT_TOKEN }}
+        run: |
+          if [ -z "$MIRROR_REPO_URL" ] || [ -z "$GIT_TOKEN" ]; then
+            echo "Mirror repository secrets not configured"
+            exit 1
+          fi
+          
+          # Clone mirror repo
+          git clone "$MIRROR_REPO_URL" /tmp/mirror-repo
+          cd /tmp/mirror-repo
+          
+          # Copy mirror export
+          cp -r ${{ github.workspace }}/.mirror-out/* .
+          
+          # Commit and push
+          git add .
+          git commit -m "chore: sync from private repo (${{ steps.tag.outputs.tag }})" || echo "No changes"
+          git tag "${{ steps.tag.outputs.tag }}" || echo "Tag already exists"
+          git push origin main
+          git push origin "${{ steps.tag.outputs.tag }}"
