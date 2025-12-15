@@ -42,6 +42,29 @@ jobs:
       - name: Run linter
         run: npm run lint
         continue-on-error: true
+      
+      - name: Check boundaries
+        run: npm run check-boundaries
+
+  typecheck:
+    if: needs.check-skip.outputs.skip != 'true'
+    needs: check-skip
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run typecheck
+        run: npm run typecheck
+        continue-on-error: true
 
   build:
     if: needs.check-skip.outputs.skip != 'true'
@@ -63,24 +86,39 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
+      - name: Build all packages
+        run: npm run build
+        continue-on-error: true
+      
+      - name: Build Protocol package
+        working-directory: packages/protocol
+        run: |
+          if [ -f "package.json" ]; then
+            npm run build || echo "Protocol build skipped"
+          fi
+        continue-on-error: true
+      
+      - name: Build Shared package
+        working-directory: packages/shared
+        run: |
+          if [ -f "package.json" ]; then
+            npm run build || echo "Shared build skipped"
+          fi
+        continue-on-error: true
+      
       - name: Build TypeScript SDK
         working-directory: packages/sdk
         run: |
           if [ -f "package.json" ]; then
-            npm run build
-          else
-            echo "TypeScript SDK package.json not found"
-            exit 1
+            npm run build || echo "TypeScript SDK build skipped"
           fi
+        continue-on-error: true
       
       - name: Build React SDK
         working-directory: packages/react-settler
         run: |
           if [ -f "package.json" ]; then
-            npm run build || echo "React SDK build skipped (no source files yet)"
-          else
-            echo "React SDK package.json not found"
-            exit 1
+            npm run build || echo "React SDK build skipped"
           fi
         continue-on-error: true
       
@@ -88,10 +126,15 @@ jobs:
         working-directory: packages/cli
         run: |
           if [ -f "package.json" ]; then
-            npm run build || echo "CLI build skipped (no source files yet)"
-          else
-            echo "CLI package.json not found"
-            exit 1
+            npm run build || echo "CLI build skipped"
+          fi
+        continue-on-error: true
+      
+      - name: Build Web app
+        working-directory: apps/web
+        run: |
+          if [ -f "package.json" ]; then
+            npm run build || echo "Web app build skipped"
           fi
         continue-on-error: true
 

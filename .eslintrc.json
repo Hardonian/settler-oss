@@ -14,7 +14,24 @@
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "@settler/enterprise",
+            "message": "Enterprise package cannot be imported in protocol/shared packages. See docs/BOUNDARY_MAP.md"
+          }
+        ],
+        "patterns": [
+          {
+            "group": ["apps/console/**"],
+            "message": "Console app internals cannot be imported in protocol/shared packages. See docs/BOUNDARY_MAP.md"
+          }
+        ]
+      }
+    ]
   },
-  "ignorePatterns": ["dist", "node_modules", "*.js"]
+  "ignorePatterns": ["dist", "node_modules", "*.js", "apps/**"]
 }

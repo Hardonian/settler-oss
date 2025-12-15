@@ -1,0 +1,29 @@
+{
+  "name": "@settler/enterprise",
+  "version": "0.1.0",
+  "description": "Settler Enterprise - Licensed connectors, policy packs, and deployment tooling",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "settler",
+    "enterprise",
+    "connectors"
+  ],
+  "author": "Scott Hardie",
+  "license": "PROPRIETARY",
+  "dependencies": {
+    "@settler/protocol": "workspace:*",
+    "@settler/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

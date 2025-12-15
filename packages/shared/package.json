@@ -1,0 +1,25 @@
+{
+  "name": "@settler/shared",
+  "version": "0.1.0",
+  "description": "Shared utilities and types safe for OSS inclusion",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "settler",
+    "shared",
+    "utilities"
+  ],
+  "author": "Scott Hardie",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

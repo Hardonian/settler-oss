@@ -1,0 +1,22 @@
+{
+  "extends": ["next/core-web-vitals", "../../.eslintrc.json"],
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "@settler/enterprise",
+            "message": "Enterprise package cannot be imported in web app. Use @settler/protocol instead."
+          }
+        ],
+        "patterns": [
+          {
+            "group": ["apps/console/**"],
+            "message": "Console app internals cannot be imported in web app."
+          }
+        ]
+      }
+    ]
+  }
+}
