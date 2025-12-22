@@ -43,7 +43,7 @@
   "devDependencies": {
     "@types/glob": "^8.1.0",
     "@types/jest": "^29.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.50.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.0.0",
     "glob": "^10.5.0",
