@@ -2,6 +2,8 @@
 
 This document describes the licensing model for Settler and provides guidance for contributors on what code belongs where.
 
+> **For a comprehensive overview of product boundaries and scope, see [PRODUCT_BOUNDARIES.md](../PRODUCT_BOUNDARIES.md)**
+
 ## License Overview
 
 Settler uses a dual-licensing model:
@@ -251,4 +253,12 @@ If you're unsure where code belongs:
 
 ---
 
-Last updated: 2024-01-XX
+## Related Documentation
+
+- **[PRODUCT_BOUNDARIES.md](../PRODUCT_BOUNDARIES.md)** - Comprehensive overview of OSS vs Cloud boundaries
+- **[BOUNDARY_MAP.md](./BOUNDARY_MAP.md)** - Technical module/package classification
+- **[VERIFICATION.md](./VERIFICATION.md)** - Automated boundary checks
+
+---
+
+Last updated: 2026-01-23

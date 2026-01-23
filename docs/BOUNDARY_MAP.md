@@ -2,6 +2,8 @@
 
 This document maps all modules, packages, and routes into their respective categories to maintain clear separation between open-source protocol code and licensed SaaS management layer code.
 
+> **For a user-facing overview of product boundaries and scope, see [PRODUCT_BOUNDARIES.md](../PRODUCT_BOUNDARIES.md)**
+
 ## Classification Categories
 
 - **Protocol (OSS)**: Open-source SDKs, API clients, specifications, CLI tools, and examples that anyone can use, modify, and self-host.
@@ -184,6 +186,14 @@ See [VERIFICATION.md](./VERIFICATION.md) for automated checks that enforce these
 
 ---
 
+## Related Documentation
+
+- **[PRODUCT_BOUNDARIES.md](../PRODUCT_BOUNDARIES.md)** - User-facing overview of OSS vs Cloud boundaries
+- **[LICENSING.md](./LICENSING.md)** - License details and contributor guidance
+- **[VERIFICATION.md](./VERIFICATION.md)** - Automated boundary checks
+
+---
+
 ## Updates
 
 This boundary map should be updated whenever:
@@ -192,4 +202,4 @@ This boundary map should be updated whenever:
 - Import relationships change
 - New features are added that affect the protocol/management boundary
 
-Last updated: 2024-01-XX
+Last updated: 2026-01-23

@@ -267,7 +267,7 @@ While the **Settler Protocol is 100% free and open-source**, we offer **enterpri
 
 **Start with the free Protocol, upgrade to Enterprise when you need managed services.**
 
-**[👉 Compare Plans](https://settler.dev/pricing)** • **[📧 Contact Sales](mailto:sales@settler.dev)**
+**[👉 Compare Plans](https://settler.dev/pricing)** • **[📧 Contact Sales](mailto:sales@settler.dev)** • **[📋 Product Boundaries](./PRODUCT_BOUNDARIES.md)**
 
 ---
 
@@ -351,6 +351,7 @@ docker run -p 3000:3000 \
 - 📖 [API Documentation](https://docs.settler.dev/api)
 - 💡 [Code Examples](./examples)
 - 🏠 [Self-Hosting Guide](./docs/SELF_HOSTING.md)
+- 📋 [Product Boundaries](./PRODUCT_BOUNDARIES.md) - OSS vs Enterprise scope
 
 ### SDK Documentation
 - 📘 [TypeScript/Node.js SDK](./packages/sdk/README.md)
