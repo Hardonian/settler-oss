@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Release Readiness Documentation:**
+  - docs/OSS_AUDIT_RUBRIC.md - Scoring framework for release readiness
+  - docs/PRE_LAUNCH_CHECKLIST.md - Pre-release verification checklist
+  - docs/FIVE_YEAR_SURVIVABILITY.md - Long-term viability assessment
+  - docs/REPO_MAP.md - Repository structure guide
+  - docs/INDEX.md - Documentation index
+  - docs/RELEASING.md - Release process guide
+  - GOVERNANCE.md - Project governance model
+- **Configuration Templates:**
+  - .env.example - Environment variable templates
+- **Repository Hygiene:**
+  - archive/README.md - Deprecated archive directory with migration notes
+
+### Changed
+- README.md - Added "Project Health & Release" section linking to new docs
+- Documentation structure improved for better discoverability
+
+### Deprecated
+- archive/ directory - Historical documentation, see archive/README.md for details
+
 ### Planned
 - React SDK components (packages/react-settler)
 - Python SDK (packages/sdk-python)

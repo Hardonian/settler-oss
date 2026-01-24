@@ -2,6 +2,8 @@
 
 This document describes how to release a new version of Settler OSS.
 
+> **For comprehensive pre-release verification, see [PRE_LAUNCH_CHECKLIST.md](./PRE_LAUNCH_CHECKLIST.md).**
+
 ## Pre-Release Checklist
 
 Before releasing, ensure:

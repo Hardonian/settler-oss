@@ -155,6 +155,8 @@ settler-oss/
 
 ## Documentation
 
+**[📚 Full Documentation Index](./docs/INDEX.md)** - Complete organized index of all documentation
+
 ### Getting Started
 - **[⚡ 10-Minute Quickstart](./docs/QUICKSTART_10MIN.md)** - Reconcile your first dataset
 - [OSS Scope](./OSS_SCOPE.md) - What's open-source vs. cloud-only
@@ -173,6 +175,14 @@ settler-oss/
 - **[Adversarial FAQ](./docs/ADVERSARIAL_FAQ.md)** - Hard questions from auditors and CFOs
 - **[Audit Readiness](./docs/AUDIT_READINESS.md)** - Using Settler in financial audits
 - **[Long-Term Support](./docs/LONG_TERM_SUPPORT.md)** - Compatibility and support policy
+
+### Project Health & Release
+- **[OSS Audit Rubric](./docs/OSS_AUDIT_RUBRIC.md)** - Release readiness scoring framework
+- **[Pre-Launch Checklist](./docs/PRE_LAUNCH_CHECKLIST.md)** - Pre-release verification checklist
+- **[Five Year Survivability](./docs/FIVE_YEAR_SURVIVABILITY.md)** - Long-term viability assessment
+- **[Governance](./GOVERNANCE.md)** - Decision-making and maintainer process
+- **[Releasing](./docs/RELEASING.md)** - Release process guide
+- **[Repository Map](./docs/REPO_MAP.md)** - Codebase navigation guide
 
 ### SDK Documentation
 - [TypeScript/Node.js SDK](./packages/sdk/README.md) - API client documentation
