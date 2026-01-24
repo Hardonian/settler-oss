@@ -1,67 +1,391 @@
 # Security Policy
 
-## Supported Versions
+**Version:** 1.1.0
+**Last Updated:** 2026-01-24
+
+---
+
+## 🎯 Security Philosophy
+
+> **Settler is a tool for financial reconciliation, not a security product.
+> We provide secure SDKs and protocols. You remain responsible for securing your systems and data.**
+
+---
+
+## 📋 Responsibility Boundaries
+
+### What Settler Is Responsible For
+
+**OSS Components:**
+- ✅ SDK code free from vulnerabilities (XSS, injection, etc.)
+- ✅ Secure defaults (HTTPS, input validation)
+- ✅ Timely patches for disclosed vulnerabilities
+- ✅ Transparent disclosure of security issues
+
+**Enterprise (Cloud) Components:**
+- ✅ API authentication and authorization
+- ✅ Encryption in transit (TLS 1.3)
+- ✅ Encryption at rest (AES-256)
+- ✅ Infrastructure security (AWS security best practices)
+- ✅ Regular security audits and penetration testing
+- ✅ SOC 2 Type II compliance (Enterprise tier)
+
+### What YOU Are Responsible For
+
+**Data Security:**
+- ⚠️ Securing your API keys (environment variables, secrets managers)
+- ⚠️ Validating transaction data before sending to Settler
+- ⚠️ Sanitizing sensitive data (PII, PCI) before reconciliation
+- ⚠️ Access control to your Settler Console account
+- ⚠️ Monitoring for unauthorized API usage
+
+**Operational Security:**
+- ⚠️ Keeping dependencies updated (npm audit, pip check, etc.)
+- ⚠️ Securing your infrastructure (servers, databases, networks)
+- ⚠️ Managing team permissions and access control
+- ⚠️ Compliance with regulations (GDPR, PCI-DSS, SOX, HIPAA)
+
+**Financial Security:**
+- ⚠️ Verifying reconciliation results before taking action
+- ⚠️ Not automating financial decisions without human review
+- ⚠️ Maintaining audit trails of reconciliation runs
+- ⚠️ Testing reconciliation logic with non-production data first
+
+---
+
+## 🚨 Supported Versions
 
 We provide security updates for the following versions:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.x.x   | :white_check_mark: |
-| < 1.0.0 | :x:                |
+| Version | Supported          | Notes |
+| ------- | ------------------ | ----- |
+| 1.x.x   | ✅ Yes | Active development and security patches |
+| < 1.0.0 | ❌ No  | Pre-release, not recommended for production |
 
-## Reporting a Vulnerability
+**Upgrade policy:**
+- Critical vulnerabilities: Patched within 24 hours
+- High severity: Patched within 7 days
+- Medium/Low severity: Included in next release
+
+---
+
+## 🔐 Reporting a Vulnerability
 
 We take security vulnerabilities seriously. If you discover a security vulnerability, please follow these steps:
 
-### DO NOT:
+### ❌ DO NOT:
 - Open a public GitHub issue
-- Discuss the vulnerability publicly
-- Share details on social media
+- Discuss the vulnerability publicly before disclosure
+- Share details on social media or forums
+- Exploit the vulnerability beyond proof-of-concept
 
-### DO:
-1. **Email us directly** at: security@settler.dev
-   - Include "SECURITY" in the subject line
-   - Provide a detailed description
-   - Include steps to reproduce
-   - Suggest a fix if possible
+### ✅ DO:
 
-2. **Wait for response**:
-   - We'll acknowledge within 48 hours
-   - We'll provide an estimated timeline for a fix
-   - We'll keep you updated on progress
+**1. Email us directly:** security@settler.dev
+   - Subject: `[SECURITY] <Brief description>`
+   - Include:
+     - Detailed description of the vulnerability
+     - Steps to reproduce (proof-of-concept)
+     - Affected versions or components
+     - Potential impact assessment
+     - Suggested fix (if you have one)
+     - Your contact information (for credit)
 
-3. **Disclosure timeline**:
-   - We'll work with you to coordinate disclosure
-   - Public disclosure after a fix is released
-   - Credit will be given if desired
+**2. Wait for acknowledgment:**
+   - We'll acknowledge receipt within 48 hours (business days)
+   - We'll provide an initial assessment within 5 business days
+   - We'll keep you updated on fix progress
 
-## Security Best Practices
+**3. Coordinated disclosure:**
+   - We'll work with you on disclosure timeline
+   - Typical timeline: 90 days from report to public disclosure
+   - We'll credit you in security advisory (if desired)
+   - We'll notify you before public disclosure
 
-When using Settler SDKs:
+**4. Bounty program (Enterprise customers):**
+   - Enterprise customers with active contracts: Case-by-case rewards
+   - OSS vulnerabilities: Public acknowledgment and credit
+   - Hall of Fame listing for responsible disclosures
 
-- **Keep dependencies updated**: Regularly update to the latest versions
-- **Use HTTPS**: Always use HTTPS endpoints
-- **Protect API keys**: Never commit API keys to version control
-- **Validate input**: Validate all user input before processing
-- **Use environment variables**: Store sensitive configuration in environment variables
-- **Review dependencies**: Regularly audit your dependencies for vulnerabilities
+---
 
-## Security Updates
+## 🛡️ Security Best Practices
+
+### For All Users
+
+**1. Protect API Keys**
+```bash
+# ✅ CORRECT - Environment variable
+export SETTLER_API_KEY="sk_live_..."
+settler reconcile --source data.csv
+
+# ❌ WRONG - Hardcoded in code
+const client = new SettlerClient({ apiKey: 'sk_live_...' });
+```
+
+**2. Use HTTPS Endpoints**
+```typescript
+// ✅ CORRECT - HTTPS
+const client = new SettlerClient({
+  apiKey: process.env.SETTLER_API_KEY,
+  baseURL: 'https://api.settler.dev',  // ← HTTPS
+});
+
+// ❌ WRONG - HTTP (insecure)
+const client = new SettlerClient({
+  baseURL: 'http://api.settler.dev',  // ← Never use HTTP!
+});
+```
+
+**3. Validate Input Data**
+```typescript
+// ✅ CORRECT - Validate before sending
+function sanitizeTransactions(transactions: unknown[]): Transaction[] {
+  return transactions
+    .filter(t => t && typeof t === 'object')
+    .map(t => ({
+      id: String(t.id || '').slice(0, 255),  // Limit length
+      amount: validateAmount(t.amount),
+      date: validateDate(t.date),
+      // Remove PII if present
+      description: sanitizePII(t.description),
+    }));
+}
+```
+
+**4. Keep Dependencies Updated**
+```bash
+# Check for vulnerabilities
+npm audit
+npm audit fix
+
+# Or with pnpm
+pnpm audit
+pnpm audit --fix
+
+# Python
+pip-audit
+```
+
+**5. Review Dependency Changes**
+- Enable Dependabot or Renovate for automated PRs
+- Review changelogs before upgrading
+- Test after dependency updates
+
+### For Self-Hosted Users
+
+**6. Secure Your Infrastructure**
+- Use firewalls and network segmentation
+- Enable encryption at rest for databases
+- Use secrets managers (AWS Secrets Manager, HashiCorp Vault, etc.)
+- Implement monitoring and alerting
+- Regular security patches for OS and dependencies
+
+**7. Access Control**
+- Principle of least privilege (minimal permissions)
+- Rotate credentials regularly
+- Use multi-factor authentication (MFA)
+- Log and monitor access
+
+**8. Data Sanitization**
+- Redact sensitive fields before reconciliation
+- Use test data for development environments
+- Implement data retention policies
+
+---
+
+## 🚫 Common Security Mistakes (Avoid These!)
+
+### ❌ Committing API Keys
+```bash
+# ❌ WRONG - API key in git history
+git add .env
+git commit -m "Add config"
+
+# ✅ CORRECT - Use .gitignore
+echo ".env" >> .gitignore
+echo ".env.local" >> .gitignore
+```
+
+### ❌ Logging Sensitive Data
+```typescript
+// ❌ WRONG - Logs API key
+console.log('API request:', { apiKey, data });
+
+// ✅ CORRECT - Redact secrets
+console.log('API request:', { apiKey: '[REDACTED]', data });
+```
+
+### ❌ Trusting User Input
+```typescript
+// ❌ WRONG - No validation
+const amount = req.body.amount;  // Could be negative, NaN, etc.
+
+// ✅ CORRECT - Validate and sanitize
+const amount = validatePositiveDecimal(req.body.amount);
+```
+
+### ❌ Ignoring TLS Certificate Errors
+```typescript
+// ❌ WRONG - Disables certificate validation
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+// ✅ CORRECT - Fix certificate issues properly
+// (Install proper CA certificates, use valid certs)
+```
+
+---
+
+## 📊 Security Updates
 
 Security updates will be:
 - Released as patch versions (e.g., 1.2.3 → 1.2.4)
-- Documented in CHANGELOG.md
-- Announced via GitHub releases
+- Documented in CHANGELOG.md with `[SECURITY]` prefix
+- Announced via:
+  - GitHub Security Advisories
+  - GitHub Releases
+  - Email to Enterprise customers (critical issues)
+  - Twitter/social media (for critical CVEs)
 - Backported to supported versions when possible
 
-## Known Vulnerabilities
+**Severity levels:**
+- **Critical:** Remote code execution, authentication bypass
+- **High:** SQL injection, XSS, privilege escalation
+- **Medium:** Information disclosure, denial of service
+- **Low:** Minor issues with limited impact
 
-We maintain a list of known vulnerabilities and their status. Check [GitHub Security Advisories](https://github.com/shardie-github/settler-oss/security/advisories) for details.
+---
 
-## Security Contact
+## 🔍 Known Vulnerabilities
 
-For security-related questions or concerns:
+We maintain a list of known vulnerabilities and their status:
+
+**Current vulnerabilities:** None known (as of 2026-01-24)
+
+**Check for updates:**
+- [GitHub Security Advisories](https://github.com/shardie-github/settler-oss/security/advisories)
+- [npm audit](https://www.npmjs.com/package/@settler/sdk?activeTab=versions)
+
+---
+
+## 🛠️ Compliance & Certifications
+
+### Enterprise (Cloud)
+- **SOC 2 Type II:** Annual audit (Enterprise tier)
+- **PCI DSS:** Level 1 Service Provider (payment data handling)
+- **GDPR:** EU data residency options, data processing agreements
+- **ISO 27001:** Information security management (in progress)
+
+### OSS
+- **No compliance guarantees:** OSS is provided "as is" (MIT license)
+- **Self-hosted compliance:** Your responsibility
+
+**Important:** Settler is a **tool**, not a compliance solution. You are responsible for meeting your regulatory requirements.
+
+---
+
+## ⚠️ Security Disclaimers
+
+### Settler Is NOT:
+- ❌ A compliance guarantee (SOX, PCI, GDPR, HIPAA)
+- ❌ A fraud detection system
+- ❌ A financial audit tool (use for operational reconciliation)
+- ❌ A substitute for manual review by qualified personnel
+- ❌ Insurance against financial losses
+
+### What This Means:
+- **Reconciliation finds differences, but doesn't prevent fraud**
+- **You must validate results before taking financial actions**
+- **Settler doesn't replace accountants, auditors, or compliance officers**
+- **No warranty or guarantee of financial accuracy (see MIT license)**
+
+### Appropriate Uses:
+- ✅ Operational reconciliation (daily/monthly transaction matching)
+- ✅ Engineering tool for finance teams
+- ✅ Data quality checks
+- ✅ Automation of manual comparison tasks
+
+### Inappropriate Uses:
+- ❌ Sole basis for financial reporting (use alongside accounting systems)
+- ❌ Automated transaction approvals without human review
+- ❌ Compliance certification (tool doesn't guarantee compliance)
+- ❌ Regulated financial advice or services
+
+---
+
+## 🏛️ Regulatory Context
+
+**Financial Regulations:**
+- Settler does not provide financial advice
+- Not a registered financial institution
+- Not subject to banking regulations (we don't hold funds)
+- Users remain responsible for compliance with:
+  - SOX (Sarbanes-Oxley) if applicable
+  - GDPR (EU data protection)
+  - PCI DSS (if processing payment card data)
+  - HIPAA (if handling health data)
+  - Local financial regulations
+
+**Data Privacy:**
+- Enterprise: Data processing agreements available
+- OSS: You control data (self-hosted)
+- No data sold to third parties
+- Transparent data handling policies
+
+---
+
+## 📞 Security Contact
+
+**For security vulnerabilities:**
 - Email: security@settler.dev
-- PGP Key: [Available on request]
+- PGP Key: Available on request
+- Response time: 48 hours (business days)
 
-Thank you for helping keep Settler secure!
+**For general security questions:**
+- GitHub Discussions: [Security tag](https://github.com/shardie-github/settler-oss/discussions)
+- Enterprise support: support@settler.dev (24/7 for critical issues)
+
+**Bug bounty inquiries:**
+- Email: security@settler.dev with subject `[BOUNTY]`
+
+---
+
+## 🔗 Related Documentation
+
+- **[INVARIANTS.md](./docs/INVARIANTS.md)** - Financial and data integrity invariants
+- **[OSS_VS_ENTERPRISE_BOUNDARY.md](./docs/OSS_VS_ENTERPRISE_BOUNDARY.md)** - OSS/Enterprise security boundaries
+- **[ARCHITECTURE.md](./docs/ARCHITECTURE.md)** - Security architecture
+
+---
+
+## ✅ Security Checklist for Production
+
+Before using Settler in production, verify:
+
+**OSS Users:**
+- [ ] API keys stored in environment variables (not code)
+- [ ] HTTPS endpoints only (no HTTP)
+- [ ] Input validation implemented
+- [ ] Dependencies audited (npm audit, pip-audit)
+- [ ] Error handling doesn't leak sensitive data
+- [ ] Logs don't contain API keys or PII
+- [ ] Test data used for development (not production data)
+- [ ] Access control implemented (who can run reconciliations)
+- [ ] Results reviewed by qualified personnel before action
+
+**Enterprise Users:**
+- [ ] All of the above, plus:
+- [ ] Team permissions configured (RBAC)
+- [ ] API key rotation schedule established
+- [ ] Webhook endpoints secured (signature verification)
+- [ ] Data residency requirements met (EU/US/APAC)
+- [ ] Audit logs enabled and monitored
+- [ ] Incident response plan includes Settler
+
+---
+
+**Thank you for helping keep Settler secure!**
+
+If you have questions about this security policy, open a GitHub Discussion or email security@settler.dev.
+
+**Last Updated:** 2026-01-24 • **Version:** 1.1.0
