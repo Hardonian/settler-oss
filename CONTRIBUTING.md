@@ -1,24 +1,104 @@
 # Contributing to Settler OSS
 
-<div align="center">
+This document explains how to contribute to Settler OSS effectively.
 
-**Thank you for your interest in contributing to Settler!** 🎉
-
-We welcome contributions from everyone, regardless of experience level.
-
-[Code of Conduct](./CODE_OF_CONDUCT.md) • [Community Guidelines](./.github/COMMUNITY.md) • [Getting Started](./GETTING_STARTED.md)
-
-</div>
+**Before contributing:** Read [MAINTAINER_RESPONSE_POLICY.md](./docs/MAINTAINER_RESPONSE_POLICY.md) to understand response expectations and [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for community standards.
 
 ---
 
-## 🌟 Why Contribute?
+## Contribution Philosophy
 
-- 🎓 **Learn** - Improve your skills and learn from experienced developers
-- 🤝 **Connect** - Join a welcoming community of developers
-- 🚀 **Impact** - Help build tools that thousands of developers use
-- 🏆 **Recognition** - Get credit for your contributions
-- 💼 **Portfolio** - Build your open source portfolio
+Settler OSS is a maintained project with limited maintainer bandwidth. Contributions are welcome when they:
+- Align with project scope and goals
+- Include tests and documentation
+- Don't significantly increase maintenance burden
+- Solve real problems for multiple users
+
+**What this means:**
+- Not all feature requests will be accepted
+- PRs may be closed if misaligned with project direction
+- Response times vary based on maintainer capacity
+- Quality and maintainability matter more than feature count
+
+## Contribution Boundaries
+
+### What We Accept
+
+**Bug fixes:**
+- Clear reproduction steps provided
+- Includes test demonstrating the bug
+- Fixes root cause, not symptoms
+- Doesn't break existing functionality
+
+**Documentation:**
+- Typo fixes, clarity improvements
+- Missing examples or use cases
+- Updated API documentation
+- Troubleshooting guides
+
+**Tests:**
+- Increased coverage for existing code
+- Edge case testing
+- Integration tests for workflows
+- Fixing flaky tests
+
+**Good first issues:**
+- Labeled `good-first-issue`
+- Well-scoped, clear solution path
+- Maintainers provide guidance
+
+### What Requires Prior Discussion
+
+Open an issue **before** writing code for:
+- New features or enhancements
+- Breaking API changes
+- New language SDKs
+- Large refactors or architectural changes
+- Changes to build or release process
+
+**Why:** Avoids wasted effort on features that won't be accepted.
+
+### What Will Be Rejected
+
+**Out of scope:**
+- Features that belong in Settler Cloud/Enterprise (see OSS_SCOPE.md)
+- Narrow use cases serving one user
+- Features that complicate the core library
+- "Nice to have" without clear problem statement
+
+**Quality issues:**
+- No tests or insufficient test coverage
+- Breaking changes without migration path
+- Undocumented public APIs
+- Code that doesn't follow project style
+
+**Process issues:**
+- Large PRs without prior discussion
+- Multiple unrelated changes in one PR
+- Ignoring code review feedback
+- Hostile or unprofessional communication
+
+## Non-Code Contributions
+
+You can contribute without writing code:
+
+**Community support:**
+- Answer questions in GitHub Discussions
+- Help reproduce reported bugs
+- Test beta releases and provide feedback
+- Share how you use Settler (use cases, blog posts)
+
+**Documentation:**
+- Fix typos and broken links
+- Improve clarity and examples
+- Write tutorials or guides
+- Translate documentation
+
+**Issue triage:**
+- Add reproduction steps to bug reports
+- Confirm bugs on different environments
+- Suggest labels or categorization
+- Close duplicates (with reference to original)
 
 ## 📋 Table of Contents
 
@@ -382,64 +462,101 @@ Closes #123
 
 ### What to Expect
 
-1. **Automated checks** - CI will run tests and linting
-2. **Code review** - Maintainers will review your code
-3. **Feedback** - You may receive suggestions for improvements
-4. **Approval** - Once approved, your PR will be merged
+1. **Automated checks** - CI runs tests and linting (must pass)
+2. **Code review** - Maintainers review when capacity allows (see MAINTAINER_RESPONSE_POLICY.md)
+3. **Feedback** - Expect requests for changes, clarification, or refactoring
+4. **Approval and merge** - Once approved, maintainers will merge
+
+**Timeline expectations:**
+- Small PRs (docs, typos): 1-2 weeks
+- Medium PRs (bug fixes, tests): 2-4 weeks
+- Large PRs (features, refactors): Several weeks to months
+- No response after 30 days: Politely bump the PR
 
 ### Responding to Feedback
 
-- ✅ Be open to suggestions
-- ✅ Ask questions if unclear
-- ✅ Make requested changes
-- ✅ Keep discussions constructive
-- ✅ Thank reviewers for their time
+- Be open to suggestions and changes
+- Ask questions if feedback is unclear
+- Address all review comments
+- Keep discussions technical and professional
+- Understand that "no" is sometimes the answer
 
-### After Approval
+### Common Review Feedback
 
-- 🎉 Your PR will be merged
-- 📝 You'll be credited in the release notes
-- 🌟 Your contribution helps the community!
+**"Can you add tests?"**
+- All code changes require tests
+- Tests should cover success and error cases
+
+**"This needs documentation"**
+- Public APIs must be documented
+- Complex logic should have comments
+- README/docs updated if behavior changes
+
+**"Can you split this into smaller PRs?"**
+- Large PRs are harder to review
+- One feature/fix per PR is ideal
+
+**"This is out of scope"**
+- Feature doesn't align with project goals
+- Consider implementing as external package or fork
+
+### If Your PR Is Closed
+
+PRs may be closed if:
+- Out of scope for the project
+- No response to feedback after 60 days
+- Maintainers lack capacity to support the feature long-term
+- Similar functionality added elsewhere
+
+**Closed ≠ bad contribution.** It may not fit the project's direction right now.
 
 ## Recognition
 
-We recognize all contributions:
+Contributors are credited in:
+- Release notes (for merged PRs)
+- CHANGELOG.md (for significant contributions)
+- GitHub contributor graph (automatic)
 
-- **Code** - PRs, bug fixes, features
-- **Documentation** - Docs, examples, tutorials
-- **Community** - Answering questions, helping others
-- **Design** - UI/UX improvements
-- **Testing** - Bug reports, test improvements
+Contributions that help maintainers (bug fixes, docs, tests) are valued more than feature additions that increase maintenance burden.
 
-Contributors are:
-- Listed in release notes
-- Credited in CHANGELOG.md
-- Recognized in discussions
-- Featured (with permission) in blog posts
+## Maintainer Expectations
 
-## Questions?
+**Maintainers will:**
+- Review PRs when capacity allows
+- Provide constructive feedback
+- Explain rejection reasons clearly
+- Respect contributors' time and effort
 
-- 💬 [Join Discussions](https://github.com/shardie-github/settler-oss/discussions)
-- ❓ [Ask a Question](https://github.com/shardie-github/settler-oss/issues/new?template=question.md)
-- 📧 [Email Support](mailto:support@settler.dev)
-- 📚 [Read Documentation](https://docs.settler.dev)
+**Maintainers are not obligated to:**
+- Respond immediately
+- Accept all contributions
+- Justify every decision in detail
+- Merge features they cannot maintain
+
+See [MAINTAINER_RESPONSE_POLICY.md](./docs/MAINTAINER_RESPONSE_POLICY.md) for detailed expectations.
+
+## Getting Help
+
+**Technical questions:**
+- [GitHub Discussions](https://github.com/shardie-github/settler-oss/discussions) (preferred)
+- [Question issue template](https://github.com/shardie-github/settler-oss/issues/new?template=question.yml)
+
+**Before asking:**
+- Search existing issues and discussions
+- Read relevant documentation
+- Include reproduction steps and context
+
+**Response time:** Best effort when maintainer capacity allows.
 
 ## Resources
 
-- [Getting Started Guide](./GETTING_STARTED.md)
-- [Code of Conduct](./CODE_OF_CONDUCT.md)
-- [Community Guidelines](./.github/COMMUNITY.md)
-- [FAQ](./FAQ.md)
-- [Roadmap](./ROADMAP.md)
+- [Maintainer Response Policy](./docs/MAINTAINER_RESPONSE_POLICY.md) - Response expectations
+- [Issue and PR Labels](./docs/ISSUE_AND_PR_LABELS.md) - Label taxonomy
+- [Next 30 Days](./docs/NEXT_30_DAYS.md) - Current priorities
+- [OSS Scope](./OSS_SCOPE.md) - What's in/out of scope
+- [Code of Conduct](./CODE_OF_CONDUCT.md) - Community standards
+- [Security Policy](./SECURITY.md) - Security reporting
 
 ---
 
-<div align="center">
-
-**Thank you for contributing to Settler!** 🎉
-
-Your contributions make Settler better for everyone.
-
-[⭐ Star us on GitHub](https://github.com/shardie-github/settler-oss/stargazers) • [💬 Join Discussions](https://github.com/shardie-github/settler-oss/discussions) • [🐛 Report Issues](https://github.com/shardie-github/settler-oss/issues)
-
-</div>
+Settler OSS is maintained by a small team with limited capacity. Realistic expectations and focused contributions make the project sustainable.

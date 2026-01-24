@@ -1,0 +1,140 @@
+name: Bug Report
+description: Report a reproducible bug in Settler OSS
+labels: ["bug", "needs-repro"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Before submitting
+
+        - Search existing issues to avoid duplicates
+        - Ensure you can reproduce the bug consistently
+        - Use the latest version when possible
+
+        **Note:** Bug reports without reproduction steps will be closed. Maintainers are not debugging consultants.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component has the bug?
+      options:
+        - TypeScript/Node.js SDK (@settler/sdk)
+        - Python SDK (settler-sdk)
+        - Go SDK
+        - Ruby SDK
+        - CLI (@settler/cli)
+        - React components (@settler/react-settler)
+        - Protocol types (@settler/protocol)
+        - Documentation
+        - Build/Infrastructure
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear, concise description of the bug
+      placeholder: "The SDK throws an error when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: Step-by-step instructions to reproduce the bug
+      placeholder: |
+        1. Install version X
+        2. Run command Y
+        3. Observe error Z
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen?
+      placeholder: "The SDK should successfully..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happens?
+      placeholder: "Instead, it throws..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Minimal Code Example
+      description: Smallest possible code that reproduces the issue
+      placeholder: |
+        ```typescript
+        import { SettlerClient } from '@settler/sdk';
+
+        const client = new SettlerClient({ apiKey: 'test' });
+        // minimal reproduction here
+        ```
+      render: typescript
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Your environment details
+      placeholder: |
+        - SDK Version: @settler/sdk@1.0.0
+        - Runtime: Node.js 20.10.0
+        - OS: Ubuntu 22.04
+        - Package Manager: npm 10.2.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Messages and Logs
+      description: Complete error messages, stack traces, and relevant logs
+      placeholder: |
+        Error: ...
+        Stack trace: ...
+      render: shell
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      description: How does this bug affect you?
+      options:
+        - Blocks critical functionality
+        - Significant workaround required
+        - Minor inconvenience
+        - Cosmetic issue
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Confirm you have completed these items
+      options:
+        - label: I have searched existing issues for duplicates
+          required: true
+        - label: I have provided clear reproduction steps
+          required: true
+        - label: I am using the latest version (or have tested with it)
+          required: true
+        - label: I have included all required environment details
+          required: true
+        - label: I understand maintainers may close this if reproduction steps are unclear
+          required: true

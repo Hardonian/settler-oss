@@ -69,7 +69,71 @@ We provide security updates for the following versions:
 
 ---
 
-## 🔐 Reporting a Vulnerability
+## 🔐 What Qualifies as a Security Issue
+
+Before reporting, understand what constitutes a security vulnerability:
+
+### ✅ Security Vulnerabilities (Report Privately)
+
+**Code execution & injection:**
+- Remote code execution (RCE)
+- SQL injection
+- Command injection
+- Cross-site scripting (XSS)
+- XML external entity (XXE) attacks
+
+**Authentication & authorization:**
+- Authentication bypass
+- Authorization bypass
+- Privilege escalation
+- Session fixation
+- Insecure defaults that expose data
+
+**Cryptography & data protection:**
+- Weak cryptography implementation
+- Hardcoded credentials in source code
+- Sensitive data exposure (PII, API keys in logs)
+- Insecure data transmission (forced HTTP when HTTPS expected)
+
+**Supply chain:**
+- Malicious dependencies
+- Compromised build artifacts
+- Vulnerable dependencies with known CVEs (if no patch available)
+
+### ❌ NOT Security Issues (Use Normal Issues Instead)
+
+**General bugs:**
+- Functional bugs that don't expose data or enable unauthorized access
+- Performance issues
+- UI/UX issues
+- Documentation errors
+
+**Configuration issues:**
+- User misconfiguration (insecure API key storage in your code)
+- Infrastructure security (your AWS, your firewall, your network)
+- Third-party service issues
+- Environment-specific issues
+
+**Out of scope:**
+- Vulnerabilities in dependencies with patches available (run `npm audit fix`)
+- Theoretical attacks without practical proof-of-concept
+- Denial of service through resource exhaustion (rate limiting is user's responsibility)
+- Social engineering attacks
+- Physical security
+- Issues requiring compromised credentials or physical access
+
+**Compliance questions:**
+- "Is Settler HIPAA compliant?" (use GitHub Discussions)
+- Requests for compliance documentation
+- Questions about security practices
+
+### 🤔 Not Sure?
+
+When in doubt, report it privately. False positives are okay. Public disclosure of vulnerabilities is not.
+
+---
+
+## 🔐 How to Report a Vulnerability
 
 We take security vulnerabilities seriously. If you discover a security vulnerability, please follow these steps:
 
@@ -102,10 +166,13 @@ We take security vulnerabilities seriously. If you discover a security vulnerabi
    - We'll credit you in security advisory (if desired)
    - We'll notify you before public disclosure
 
-**4. Bounty program (Enterprise customers):**
-   - Enterprise customers with active contracts: Case-by-case rewards
-   - OSS vulnerabilities: Public acknowledgment and credit
+**4. Recognition and rewards:**
+   - **No bug bounty program** for OSS vulnerabilities at this time
+   - Public acknowledgment and credit in security advisory (if you wish)
    - Hall of Fame listing for responsible disclosures
+   - Enterprise customers: Contact your account manager about bounty eligibility
+
+   **Important:** Do not expect financial compensation for OSS vulnerability reports. We deeply appreciate responsible disclosure, but cannot offer monetary rewards currently.
 
 ---
 
@@ -349,7 +416,8 @@ We maintain a list of known vulnerabilities and their status:
 - Enterprise support: support@settler.dev (24/7 for critical issues)
 
 **Bug bounty inquiries:**
-- Email: security@settler.dev with subject `[BOUNTY]`
+- No active bounty program for OSS
+- Enterprise customers: Contact your account manager
 
 ---
 
