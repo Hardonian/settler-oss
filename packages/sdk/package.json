@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "lint": "eslint src --ext .ts",
     "clean": "rm -rf dist"
   },
@@ -14,7 +14,9 @@
     "settler",
     "reconciliation",
     "sdk",
-    "typescript"
+    "typescript",
+    "financial",
+    "transaction-matching"
   ],
   "author": "Scott Hardie",
   "license": "MIT",
@@ -23,9 +25,25 @@
     "README.md",
     "LICENSE"
   ],
-  "dependencies": {},
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@settler/protocol": "^0.1.0"
+  },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shardie-github/settler-oss.git",
+    "directory": "packages/sdk"
   }
 }

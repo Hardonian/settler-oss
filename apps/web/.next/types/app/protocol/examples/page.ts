@@ -1,4 +1,4 @@
-// File: /workspace/apps/web/src/app/protocol/examples/page.tsx
+// File: /home/user/settler-oss/apps/web/src/app/protocol/examples/page.tsx
 import * as entry from '../../../../../src/app/protocol/examples/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
