@@ -1,0 +1,122 @@
+name: Question
+description: Ask a question about using Settler OSS
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Before asking
+
+        Please check these resources first:
+        - [Documentation](https://github.com/Hardonian/settler-oss/tree/main/docs)
+        - [Existing Discussions](https://github.com/Hardonian/settler-oss/discussions)
+        - [Closed Issues](https://github.com/Hardonian/settler-oss/issues?q=is%3Aissue+is%3Aclosed)
+        - [README.md](https://github.com/Hardonian/settler-oss/blob/main/README.md)
+
+        **Note:** GitHub Issues are for bugs and feature requests. For open-ended discussions, usage help, or "how do I..." questions, use [GitHub Discussions](https://github.com/Hardonian/settler-oss/discussions) instead.
+
+        **Support expectations:** Maintainers provide best-effort support when time allows. We cannot guarantee response times or solutions. Consider Settler Cloud Enterprise for dedicated support.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Question Type
+      description: What kind of question is this?
+      options:
+        - Usage/How-to
+        - API behavior clarification
+        - Best practices
+        - Integration question
+        - Performance question
+        - Should be a Discussion (not an issue)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component is your question about?
+      options:
+        - TypeScript/Node.js SDK
+        - Python SDK
+        - Go SDK
+        - Ruby SDK
+        - CLI tool
+        - React components
+        - General/Multiple components
+        - Architecture/Design
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: Ask your question clearly and concisely
+      placeholder: "How do I...? What is the intended behavior when...?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context and Goal
+      description: What are you trying to accomplish? What's your use case?
+      placeholder: |
+        I'm building a reconciliation system that needs to...
+        My goal is to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: attempted
+    attributes:
+      label: What You've Tried
+      description: What approaches have you already attempted?
+      placeholder: |
+        1. Tried [approach] but [result]
+        2. Reviewed [documentation link] which suggested [...]
+        3. Attempted to [...]
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Relevant Code
+      description: If applicable, show the code you're working with
+      placeholder: |
+        ```typescript
+        import { SettlerClient } from '@settler/sdk';
+
+        // Your code here
+        ```
+      render: typescript
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Provide version and environment details
+      placeholder: |
+        - SDK Version: @settler/sdk@1.0.0
+        - Runtime: Node.js 20.10.0
+        - OS: Ubuntu 22.04
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Confirm you have completed these items
+      options:
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: I have reviewed the relevant documentation
+          required: true
+        - label: I have provided sufficient context about my goal
+          required: true
+        - label: I understand this may be closed and redirected to Discussions
+          required: true
+        - label: I understand maintainers may not be able to respond immediately
+          required: true

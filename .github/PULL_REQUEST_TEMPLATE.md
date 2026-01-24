@@ -1,63 +1,96 @@
-## Description
-<!-- Provide a clear and concise description of what this PR does -->
+## What Problem Does This Solve?
 
-## Type of Change
+<!-- Clearly explain the problem this PR addresses. Link to related issues. -->
+
+Fixes #(issue)
+
+## Why Does This Belong in Core?
+
+<!-- Explain why this change should be in the core repository rather than:
+- User-land implementation
+- Plugin/extension
+- External tool
+- Fork
+
+If this is a bug fix, explain the impact and why it needs to be fixed in core.
+-->
+
+## What Changed?
+
+<!-- Concise summary of what was modified, added, or removed -->
+
+**Key changes:**
+-
+-
+-
+
+## How Was This Tested?
+
+<!-- Describe your testing approach. Be specific. -->
+
+**Testing done:**
+- [ ] Added unit tests (path/to/test/file)
+- [ ] Added integration tests
+- [ ] Manual testing: [describe scenario]
+- [ ] Tested on [environments/versions]
+
+**How to verify:**
+1.
+2.
+3.
+
+## Backward Compatibility Impact
+
+<!-- Choose one and explain -->
+
+- [ ] **No breaking changes** - Fully backward compatible
+- [ ] **Breaking changes** - Existing code will break (see migration guide below)
+- [ ] **Deprecation** - Old API deprecated but still works (for how long?)
+
+**Migration guide** (if breaking):
+```typescript
+// Before:
+// code example
+
+// After:
+// code example
+```
+
+## Risk Assessment
+
+<!-- One paragraph: What could go wrong? What's the blast radius if this has a bug? -->
+
+**Risk level:** [Low / Medium / High]
+
+**Mitigation:**
+-
+-
+
+## Components Affected
+
 <!-- Check all that apply -->
-- [ ] 🐛 Bug fix (non-breaking change which fixes an issue)
-- [ ] ✨ New feature (non-breaking change which adds functionality)
-- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] 📚 Documentation update
-- [ ] ♻️ Refactoring (no functional changes)
-- [ ] ⚡ Performance improvement
-- [ ] ✅ Test update
-- [ ] 🔧 Build/CI changes
+- [ ] TypeScript/Node.js SDK
+- [ ] Python SDK
+- [ ] Go SDK
+- [ ] Ruby SDK
+- [ ] CLI
+- [ ] React components
+- [ ] Protocol/types
+- [ ] Documentation only
+- [ ] Build/infrastructure
 
-## Related Issues
-<!-- Link related issues using keywords: Closes, Fixes, Resolves -->
-Closes #(issue number)
-Fixes #(issue number)
+## Pre-submission Checklist
 
-## Changes Made
-<!-- List the key changes in this PR -->
-- 
-- 
-- 
-
-## SDKs Affected
-<!-- Check all SDKs that are affected by this change -->
-- [ ] TypeScript/Node.js SDK (`packages/sdk`)
-- [ ] Python SDK (`packages/sdk-python`)
-- [ ] Go SDK (`packages/sdk-go`)
-- [ ] Ruby SDK (`packages/sdk-ruby`)
-- [ ] React SDK (`packages/react-settler`)
-- [ ] CLI (`packages/cli`)
-- [ ] Documentation
-- [ ] Examples
-- [ ] Other: ___________
-
-## Testing
-<!-- Describe the tests you ran and how to verify your changes -->
-- [ ] ✅ Tests added/updated
-- [ ] ✅ All tests pass locally (`npm test`)
-- [ ] ✅ Linting passes (`npm run lint`)
-- [ ] ✅ Build succeeds (`npm run build`)
-- [ ] ✅ Manual testing completed
-- [ ] ✅ Tested on Node.js 18.x
-- [ ] ✅ Tested on Node.js 20.x
-
-## Checklist
-<!-- Ensure all items are completed before requesting review -->
-- [ ] ✅ Code follows the project's style guidelines
-- [ ] ✅ Self-review completed
-- [ ] ✅ Comments added for complex code
-- [ ] ✅ Documentation updated (README, API docs, etc.)
-- [ ] ✅ No new warnings generated
-- [ ] ✅ Tests added/updated and passing
-- [ ] ✅ Breaking changes documented in CHANGELOG.md
-- [ ] ✅ Changes are backward compatible (or breaking changes are clearly marked)
-
-## Screenshots/Demo
-<!-- If applicable, add screenshots or a demo to help explain your changes -->
+- [ ] Code follows existing style and conventions
+- [ ] Self-reviewed for correctness and clarity
+- [ ] Tests added and passing locally
+- [ ] Documentation updated (if needed)
+- [ ] No unnecessary dependencies added
+- [ ] Commit messages are clear and descriptive
+- [ ] I understand this PR may be closed if scope is misaligned
+- [ ] I understand maintainers may request refactors or changes
+- [ ] I understand silence ≠ rejection (maintainers have limited time)
 
 ## Additional Context
-<!-- Add any other context, considerations, or information reviewers should know -->
+
+<!-- Optional: Screenshots, benchmarks, design decisions, alternative approaches considered -->

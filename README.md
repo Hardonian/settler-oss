@@ -222,14 +222,41 @@ npm run check-boundaries
 
 ## Contributing
 
-We welcome contributions:
-- Bug fixes
-- Documentation improvements
-- SDK enhancements
-- New language SDKs (Python, Go, Ruby)
-- Code examples
+Settler OSS welcomes contributions that align with project goals and maintainer capacity.
 
-**Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.**
+### What We're Looking For
+
+**High-value contributions:**
+- Bug fixes with clear reproduction steps
+- Documentation improvements (typos, clarity, examples)
+- Test coverage improvements
+- CLI and SDK enhancements (with prior discussion)
+- Good first issues (labeled `good-first-issue`)
+
+**Contributions requiring discussion first:**
+- New features (open feature request issue first)
+- Breaking API changes (rarely accepted)
+- New language SDKs (coordinate with maintainers)
+- Large refactors (stability over churn)
+
+### What Will Not Be Accepted
+
+**Out of scope:**
+- Features that belong in Cloud/Enterprise (see OSS_SCOPE.md)
+- Large architectural changes without maintainer buy-in
+- Features serving narrow use cases
+- Code that increases maintenance burden significantly
+- PRs without tests or documentation
+
+### How to Help Without Coding
+
+- Answer questions in GitHub Discussions
+- Report bugs with reproduction steps
+- Improve documentation and examples
+- Test beta releases and provide feedback
+- Help triage issues (add context, reproduce bugs)
+
+**Read [CONTRIBUTING.md](./CONTRIBUTING.md) for complete guidelines and [MAINTAINER_RESPONSE_POLICY.md](./docs/MAINTAINER_RESPONSE_POLICY.md) for response expectations.**
 
 ---
 

@@ -1,0 +1,142 @@
+name: Governance or Process Discussion
+description: Discuss project governance, contribution process, or meta topics
+labels: ["governance", "meta"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Governance and Process Discussions
+
+        Use this template for discussions about:
+        - Project governance and decision-making
+        - Contribution policies and processes
+        - Code of conduct concerns
+        - Release processes
+        - Security policies
+        - Maintainer practices
+        - Community health
+
+        **Note:** This template is for meta discussions about how the project operates, not for bug reports or feature requests.
+
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic Area
+      description: What aspect of governance or process does this concern?
+      options:
+        - Contribution guidelines
+        - Code review process
+        - Release and versioning
+        - Security policies
+        - Code of conduct
+        - Maintainer workflow
+        - Issue/PR triage
+        - Documentation standards
+        - Testing requirements
+        - Community engagement
+        - Other governance topic
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_state
+    attributes:
+      label: Current State
+      description: What is the current policy, process, or situation?
+      placeholder: |
+        Currently, the project handles [topic] by [current approach].
+        This is documented in [location or "not documented"].
+    validations:
+      required: true
+
+  - type: textarea
+    id: concern_or_proposal
+    attributes:
+      label: Concern or Proposal
+      description: What is the issue or what are you proposing?
+      placeholder: |
+        Problem: [describe the issue with current approach]
+
+        OR
+
+        Proposal: [describe what you'd like to change and why]
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why is this important? What problem does it solve?
+      placeholder: |
+        This matters because:
+        1. [reason]
+        2. [impact on contributors/maintainers]
+        3. [long-term benefit]
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples or Evidence
+      description: Provide examples, links to other projects, or evidence supporting this discussion
+      placeholder: |
+        - Similar approach in [project]: [link]
+        - Example of current issue: [description or link]
+        - Community feedback: [reference]
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact Level
+      description: How significant would this change be?
+      options:
+        - Minor process clarification
+        - Moderate policy change
+        - Significant governance change
+        - Major structural change
+    validations:
+      required: true
+
+  - type: textarea
+    id: stakeholders
+    attributes:
+      label: Stakeholders Affected
+      description: Who would be affected by this change?
+      placeholder: |
+        - [ ] Core maintainers
+        - [ ] Regular contributors
+        - [ ] First-time contributors
+        - [ ] End users
+        - [ ] Security researchers
+        - [ ] Documentation contributors
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Approaches
+      description: What other approaches have you considered?
+      placeholder: |
+        1. [Alternative approach and its trade-offs]
+        2. [Another option and why you prefer your proposal]
+        3. [Status quo and its limitations]
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Confirm you have completed these items
+      options:
+        - label: I have searched existing issues for similar discussions
+          required: true
+        - label: This is about project governance/process, not a feature request or bug
+          required: true
+        - label: I have clearly explained the current state and my concern/proposal
+          required: true
+        - label: I understand maintainers may take time to discuss and decide
+          required: true
+        - label: I understand this discussion may not result in immediate action
+          required: true
