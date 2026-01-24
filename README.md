@@ -158,8 +158,11 @@ settler-oss/
 - [Architecture](./docs/ARCHITECTURE.md) - System architecture overview
 - [Cloud vs OSS](./docs/CLOUD_VS_OSS.md) - Detailed comparison
 
-### Core Principles
-- **[Invariants](./docs/INVARIANTS.md)** - Financial correctness guarantees
+### Core Principles & Trust Framework
+- **[Guarantees](./docs/GUARANTEES.md)** - What Settler guarantees vs. explicit non-guarantees ⭐
+- **[Threat Model](./docs/THREAT_MODEL.md)** - Security boundaries and responsibilities ⭐
+- **[Determinism](./docs/DETERMINISM.md)** - Deterministic behavior specification ⭐
+- **[Invariants](./docs/INVARIANTS.md)** - Financial correctness requirements
 - **[Stack Agnosticity](./docs/STACK_AGNOSTICITY.md)** - Provider-agnostic design
 - **[OSS vs Enterprise Boundary](./docs/OSS_VS_ENTERPRISE_BOUNDARY.md)** - Clear boundaries
 
