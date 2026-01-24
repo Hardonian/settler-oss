@@ -8,15 +8,18 @@
 
 **Open-source SDKs and tools for financial reconciliation**
 
-[📚 Documentation](./docs) • [🚀 Quick Start](#-quick-start) • [💬 Discussions](https://github.com/shardie-github/settler-oss/discussions)
+[Documentation](./docs) • [Quick Start](#quick-start) • [Discussions](https://github.com/shardie-github/settler-oss/discussions)
 
 </div>
 
 ---
 
-## 🎯 What is Settler OSS?
+## What is Settler OSS?
 
 Settler OSS provides **open-source client SDKs, protocol types, and development tools** for building financial reconciliation workflows. This repository contains the building blocks for integrating with Settler Cloud or building your own reconciliation system.
+
+> **Important for Finance Teams & Auditors:**
+> Settler is a **matching tool**, not an accounting system or compliance solution. It compares datasets and identifies matches/discrepancies. You remain responsible for data quality, financial decisions, regulatory compliance, and human review of results. See [ADVERSARIAL_FAQ.md](./docs/ADVERSARIAL_FAQ.md) for critical questions and [AUDIT_READINESS.md](./docs/AUDIT_READINESS.md) for audit integration guidance.
 
 ### What's Included (MIT Licensed)
 
@@ -38,13 +41,13 @@ This repository does **NOT** include:
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-**Get started in under 10 minutes.** Choose your path:
+Choose your integration path:
 
-### Option 1: Try the Demo (2 minutes)
+### Option 1: Try the Demo
 
-See Settler in action immediately:
+See Settler's basic functionality locally:
 
 ```bash
 npx @settler/cli demo
@@ -52,7 +55,7 @@ npx @settler/cli demo
 
 This runs a sample reconciliation showing matched and unmatched transactions.
 
-**[📖 Full Quickstart Guide (10 min)](./docs/QUICKSTART_10MIN.md)** - Step-by-step tutorial
+**[Full Quickstart Guide](./docs/QUICKSTART_10MIN.md)** - Step-by-step tutorial
 
 ---
 
@@ -84,7 +87,7 @@ console.log(`Matched: ${result.summary.matched}`);
 console.log(`Unmatched: ${result.summary.unmatchedSource}`);
 ```
 
-**[👉 Get Free API Key (100 transactions/month)](https://settler.dev)**
+**[Get Free API Key (100 transactions/month)](https://settler.dev)**
 
 ---
 
@@ -111,7 +114,7 @@ settler reconcile --source payments.csv --target invoices.csv
 
 ---
 
-## 📦 Repository Structure
+## Repository Structure
 
 ```
 settler-oss/
@@ -130,7 +133,7 @@ settler-oss/
 
 ---
 
-## 🎓 Use Cases
+## Use Cases
 
 ### What You Can Build with OSS
 
@@ -150,7 +153,7 @@ settler-oss/
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 ### Getting Started
 - **[⚡ 10-Minute Quickstart](./docs/QUICKSTART_10MIN.md)** - Reconcile your first dataset
@@ -159,12 +162,17 @@ settler-oss/
 - [Cloud vs OSS](./docs/CLOUD_VS_OSS.md) - Detailed comparison
 
 ### Core Principles & Trust Framework
-- **[Guarantees](./docs/GUARANTEES.md)** - What Settler guarantees vs. explicit non-guarantees ⭐
-- **[Threat Model](./docs/THREAT_MODEL.md)** - Security boundaries and responsibilities ⭐
-- **[Determinism](./docs/DETERMINISM.md)** - Deterministic behavior specification ⭐
+- **[Guarantees](./docs/GUARANTEES.md)** - What Settler guarantees vs. explicit non-guarantees
+- **[Threat Model](./docs/THREAT_MODEL.md)** - Security boundaries and responsibilities
+- **[Determinism](./docs/DETERMINISM.md)** - Deterministic behavior specification
 - **[Invariants](./docs/INVARIANTS.md)** - Financial correctness requirements
 - **[Stack Agnosticity](./docs/STACK_AGNOSTICITY.md)** - Provider-agnostic design
 - **[OSS vs Enterprise Boundary](./docs/OSS_VS_ENTERPRISE_BOUNDARY.md)** - Clear boundaries
+
+### External Review & Institutional Use
+- **[Adversarial FAQ](./docs/ADVERSARIAL_FAQ.md)** - Hard questions from auditors and CFOs
+- **[Audit Readiness](./docs/AUDIT_READINESS.md)** - Using Settler in financial audits
+- **[Long-Term Support](./docs/LONG_TERM_SUPPORT.md)** - Compatibility and support policy
 
 ### SDK Documentation
 - [TypeScript/Node.js SDK](./packages/sdk/README.md) - API client documentation
@@ -178,7 +186,7 @@ settler-oss/
 
 ---
 
-## 🛠️ Development
+## Development
 
 This is a monorepo managed with npm workspaces (or pnpm).
 
@@ -202,20 +210,20 @@ npm run check-boundaries
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-We welcome contributions! Whether it's:
-- 🐛 Bug fixes
-- 📚 Documentation improvements
-- 💻 SDK enhancements
-- 🌍 New language SDKs (Python, Go, Ruby)
-- 📖 Code examples
+We welcome contributions:
+- Bug fixes
+- Documentation improvements
+- SDK enhancements
+- New language SDKs (Python, Go, Ruby)
+- Code examples
 
 **Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.**
 
 ---
 
-## 📊 Comparison: OSS vs Cloud
+## Comparison: OSS vs Cloud
 
 | Feature | OSS (This Repo) | Cloud (SaaS) |
 |---------|-----------------|--------------|
@@ -235,7 +243,7 @@ We welcome contributions! Whether it's:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 Settler uses an "open core" model:
 
@@ -267,7 +275,7 @@ Settler uses an "open core" model:
 
 ---
 
-## 🔒 Security
+## Security
 
 Found a security vulnerability? Please email [security@settler.dev](mailto:security@settler.dev).
 
@@ -277,7 +285,7 @@ See [SECURITY.md](./SECURITY.md) for our security policy.
 
 ---
 
-## 📝 License
+## License
 
 This repository is **MIT licensed** - see [LICENSE](./LICENSE) for details.
 
@@ -290,20 +298,17 @@ This repository is **MIT licensed** - see [LICENSE](./LICENSE) for details.
 
 ---
 
-## 🌟 Show Your Support
+## Community & Support
 
-If you find Settler OSS useful:
-- ⭐ **[Star this repository](https://github.com/shardie-github/settler-oss/stargazers)** - Help others discover Settler
-- 🍴 **[Fork it](https://github.com/shardie-github/settler-oss/fork)** - Build your own reconciliation system
-- 🐛 **[Report bugs](https://github.com/shardie-github/settler-oss/issues)** - Help us improve
-- 🤝 **[Contribute](./CONTRIBUTING.md)** - Code, docs, or examples welcome
-- 💬 **[Join Discussions](https://github.com/shardie-github/settler-oss/discussions)** - Share use cases and learnings
-
-**Why star?** Stars help finance teams and developers discover trustworthy reconciliation tools. Your star matters!
+- **[Star this repository](https://github.com/shardie-github/settler-oss/stargazers)** - Increase project visibility
+- **[Fork it](https://github.com/shardie-github/settler-oss/fork)** - Build your own reconciliation system
+- **[Report bugs](https://github.com/shardie-github/settler-oss/issues)** - Help improve code quality
+- **[Contribute](./CONTRIBUTING.md)** - Code, documentation, or examples
+- **[Join Discussions](https://github.com/shardie-github/settler-oss/discussions)** - Technical questions and use cases
 
 ---
 
-## 🔗 Links
+## Links
 
 - **Documentation:** [./docs](./docs)
 - **Website:** [settler.dev](https://settler.dev) (Cloud platform)
@@ -314,8 +319,8 @@ If you find Settler OSS useful:
 
 <div align="center">
 
-**Made with ❤️ by the Settler team and community**
+**Settler OSS** - Open-source reconciliation toolkit
 
-[⭐ Star us on GitHub](https://github.com/shardie-github/settler-oss/stargazers) • [🍴 Fork us](https://github.com/shardie-github/settler-oss/fork) • [💬 Join Discussions](https://github.com/shardie-github/settler-oss/discussions)
+[Star on GitHub](https://github.com/shardie-github/settler-oss/stargazers) • [Fork](https://github.com/shardie-github/settler-oss/fork) • [Discussions](https://github.com/shardie-github/settler-oss/discussions)
 
 </div>
