@@ -8,6 +8,9 @@ This directory contains technical and architectural documentation for Settler OS
 - **[THREAT_MODEL.md](./THREAT_MODEL.md)** - Threat modeling, attack scenarios, security boundaries
 - **[GUARANTEES.md](./GUARANTEES.md)** - What Settler guarantees vs. explicit non-guarantees
 - **[DETERMINISM.md](./DETERMINISM.md)** - Deterministic behavior specification and boundaries
+- **[ADVERSARIAL_FAQ.md](./ADVERSARIAL_FAQ.md)** - Hard questions from auditors, CFOs, and skeptics
+- **[AUDIT_READINESS.md](./AUDIT_READINESS.md)** - Using Settler within audit workflows
+- **[LONG_TERM_SUPPORT.md](./LONG_TERM_SUPPORT.md)** - Compatibility and support policy
 
 ### System Specifications
 - **[INVARIANTS.md](./INVARIANTS.md)** - Financial correctness and data integrity invariants
@@ -34,9 +37,11 @@ This directory contains technical and architectural documentation for Settler OS
 ## For Different Audiences
 
 **Finance Engineers & Auditors:**
-- Start with [GUARANTEES.md](./GUARANTEES.md) to understand what Settler does and doesn't guarantee
-- Review [THREAT_MODEL.md](./THREAT_MODEL.md) for security boundaries and responsibilities
-- See [INVARIANTS.md](./INVARIANTS.md) for financial correctness requirements
+- Start with [ADVERSARIAL_FAQ.md](./ADVERSARIAL_FAQ.md) for honest answers to hard questions
+- Review [AUDIT_READINESS.md](./AUDIT_READINESS.md) for using Settler in audits
+- Read [GUARANTEES.md](./GUARANTEES.md) to understand what Settler does and doesn't guarantee
+- See [THREAT_MODEL.md](./THREAT_MODEL.md) for security boundaries and responsibilities
+- Check [INVARIANTS.md](./INVARIANTS.md) for financial correctness requirements
 
 **Security Engineers:**
 - Review [THREAT_MODEL.md](./THREAT_MODEL.md) for attack scenarios and controls
@@ -49,9 +54,11 @@ This directory contains technical and architectural documentation for Settler OS
 - See [ARCHITECTURE.md](./ARCHITECTURE.md) for system design
 
 **Legal & Compliance:**
+- Start with [ADVERSARIAL_FAQ.md](./ADVERSARIAL_FAQ.md) for institutional evaluation questions
 - Review [GUARANTEES.md](./GUARANTEES.md) for liability boundaries
 - See [THREAT_MODEL.md](./THREAT_MODEL.md) section "What Settler Does NOT Protect Against"
-- Check [LICENSING.md](./LICENSING.md) for license terms
+- Check [LONG_TERM_SUPPORT.md](./LONG_TERM_SUPPORT.md) for long-term commitments
+- Review [LICENSING.md](./LICENSING.md) for license terms
 
 ## Contributing Documentation
 
