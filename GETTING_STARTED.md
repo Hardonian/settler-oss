@@ -4,11 +4,13 @@ Welcome to Settler! This guide will help you get up and running quickly.
 
 ## 🎯 What is Settler?
 
-Settler provides powerful APIs and SDKs for:
-- 💰 **Financial Reconciliation** - Match and reconcile transactions
-- 🔄 **Data Synchronization** - Sync data between systems
-- 📊 **Transaction Matching** - Intelligent transaction matching
-- 🎯 **Rule-Based Processing** - Flexible rule engine
+Settler provides APIs and SDKs for:
+- 💰 **Financial Reconciliation** - Compare and match transactions between datasets
+- 📊 **Transaction Matching** - Rule-based transaction matching
+- 🎯 **Discrepancy Detection** - Identify unmatched transactions and differences
+- 🔍 **Data Comparison** - Compare data between systems (read-only)
+
+**Important:** Settler is a **matching and comparison tool**. It identifies differences but does not modify data, fix errors, or guarantee financial correctness. Human review of results is required.
 
 ## 🚀 Quick Start (5 Minutes)
 
@@ -169,13 +171,17 @@ export SETTLER_API_KEY=your_api_key_here
    });
    ```
 
-3. **Sync Data Between Systems**
+3. **Identify Discrepancies**
    ```typescript
-   const result = await client.sync({
-     source: sourceSystem,
-     target: targetSystem,
-     mapping: fieldMapping
+   const result = await client.reconcile({
+     source: systemA,
+     target: systemB,
+     rules: { tolerance: 0.01 }
    });
+
+   // Review unmatched transactions
+   console.log('Unmatched in source:', result.unmatchedSource);
+   console.log('Unmatched in target:', result.unmatchedTarget);
    ```
 
 ## 🛠️ Development Setup

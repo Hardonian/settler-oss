@@ -4,7 +4,13 @@
 
 ### What is Settler?
 
-Settler is a platform that provides APIs and SDKs for financial reconciliation, transaction matching, and data synchronization. It helps you match transactions, reconcile accounts, and sync data between different systems.
+Settler is a reconciliation tool that provides APIs and SDKs for comparing and matching financial transactions between datasets. It identifies matched pairs and unmatched transactions to help you find discrepancies.
+
+**What Settler does:** Deterministic transaction matching, discrepancy detection, read-only comparison
+
+**What Settler does NOT do:** Data modification, fraud detection, regulatory compliance, data quality validation
+
+See [docs/GUARANTEES.md](./docs/GUARANTEES.md) for complete details on what is and isn't guaranteed.
 
 ### What languages are supported?
 
@@ -59,7 +65,13 @@ See the [Getting Started Guide](./GETTING_STARTED.md) for detailed installation 
 
 ### How does reconciliation work?
 
-Settler matches transactions from a source system with transactions from a target system based on rules you define (amount, date, ID, etc.). It returns matched pairs, unmatched items, and discrepancies.
+Settler compares transactions from a source dataset with transactions from a target dataset based on rules you configure (amount tolerance, date range, field matching). It returns:
+
+- **Matched pairs:** Transactions that match based on your rules
+- **Unmatched source:** Transactions in source but not in target
+- **Unmatched target:** Transactions in target but not in source
+
+**Important:** Settler identifies differences but does not determine which side is "correct." Human review is required to investigate discrepancies and take action.
 
 ### What matching rules are supported?
 
@@ -74,7 +86,13 @@ See the [API documentation](https://docs.settler.dev/api) for details.
 
 ### Can I use Settler for real-time reconciliation?
 
-Yes! Settler supports both batch and real-time reconciliation. Use the API directly for real-time processing.
+Settler is designed for batch reconciliation workflows (end-of-day, periodic processing). While the Cloud API can be called in real-time workflows, there are no real-time processing guarantees.
+
+**Typical use case:** End-of-day reconciliation, periodic batch jobs, scheduled matching
+
+**Not recommended:** Sub-second decision-making, real-time payment authorization, streaming data processing
+
+See [docs/GUARANTEES.md](./docs/GUARANTEES.md) section N4 for details.
 
 ### What's the rate limit?
 
@@ -162,10 +180,17 @@ Run `npm install` (or equivalent for your package manager) to install dependenci
 
 ### Results don't match expectations
 
-- Check your matching rules
-- Verify data format
-- Review API documentation
-- Check for data quality issues (nulls, formatting, etc.)
+Settler matches based on the rules and data you provide. If results are unexpected:
+
+- **Check your matching rules** - Tolerance settings, date ranges, field configuration
+- **Verify data format** - ISO 8601 dates (YYYY-MM-DD), numeric amounts, required fields
+- **Validate data quality upstream** - Settler does not fix bad data, duplicates, or nulls
+- **Review API documentation** - Ensure you understand matching behavior
+- **Check for currency consistency** - All transactions must use the same currency
+
+**Remember:** Settler is deterministic. Same input + same rules = same output. If results seem wrong, the issue is typically in input data or rule configuration, not Settler's matching logic.
+
+See [docs/DETERMINISM.md](./docs/DETERMINISM.md) and [docs/THREAT_MODEL.md](./docs/THREAT_MODEL.md) for details.
 
 ## Contributing
 
