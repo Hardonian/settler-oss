@@ -242,7 +242,7 @@ This document defines the boundaries between Settler's **open-source SDK** (MIT 
 
 1. **Use SDK with Settler Cloud**
    - Install SDK via npm/pip/gem
-   - Sign up for free account at settler.io
+   - Sign up for free account at settler.dev
    - Get API key and start reconciling
    - Use free tier (100 transactions/month)
 
@@ -340,7 +340,7 @@ This document defines the boundaries between Settler's **open-source SDK** (MIT 
 **Who:** Developers who want a managed solution
 
 1. Install SDK: `npm install @settler/sdk`
-2. Sign up at [settler.io](https://settler.io)
+2. Sign up at [settler.dev](https://settler.dev)
 3. Get API key
 4. Create reconciliation jobs
 5. Monitor in Developer Console

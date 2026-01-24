@@ -40,11 +40,27 @@ This repository does **NOT** include:
 
 ## 🚀 Quick Start
 
-### Option 1: Use Settler Cloud (Recommended)
+**Get started in under 10 minutes.** Choose your path:
+
+### Option 1: Try the Demo (2 minutes)
+
+See Settler in action immediately:
+
+```bash
+npx @settler/cli demo
+```
+
+This runs a sample reconciliation showing matched and unmatched transactions.
+
+**[📖 Full Quickstart Guide (10 min)](./docs/QUICKSTART_10MIN.md)** - Step-by-step tutorial
+
+---
+
+### Option 2: Use Settler Cloud (Recommended for Production)
 
 Sign up for Settler Cloud to get:
-- ✅ Managed reconciliation engine
-- ✅ Pre-built adapters (Stripe, Shopify, QuickBooks, etc.)
+- ✅ Managed reconciliation engine with advanced matching
+- ✅ Pre-built adapters (Stripe, Shopify, QuickBooks, + 50 more)
 - ✅ Developer console and monitoring
 - ✅ Webhooks and scheduled jobs
 
@@ -70,9 +86,11 @@ console.log(`Unmatched: ${result.summary.unmatchedSource}`);
 
 **[👉 Get Free API Key (100 transactions/month)](https://settler.dev)**
 
-### Option 2: Local Development & Testing
+---
 
-Use the CLI for local reconciliation testing:
+### Option 3: Local Development & Testing
+
+Test reconciliation logic locally without a cloud account:
 
 ```bash
 # Install CLI
@@ -81,11 +99,15 @@ npm install -g @settler/cli
 # Run demo
 settler demo
 
-# Or reconcile your own CSV files
-settler reconcile --source data/source.csv --target data/target.csv
+# Reconcile your own CSV files
+settler reconcile --source payments.csv --target invoices.csv
 ```
 
-The CLI includes a basic reconciliation engine for local testing (exact matching only). For production use with advanced matching, use Settler Cloud.
+**Local CLI features:**
+- ✅ Works offline (no cloud needed)
+- ✅ Exact matching algorithm
+- ✅ CSV import/export
+- ⚠️ No fuzzy matching or advanced rules (use Cloud for production)
 
 ---
 
@@ -131,9 +153,15 @@ settler-oss/
 ## 📚 Documentation
 
 ### Getting Started
+- **[⚡ 10-Minute Quickstart](./docs/QUICKSTART_10MIN.md)** - Reconcile your first dataset
 - [OSS Scope](./OSS_SCOPE.md) - What's open-source vs. cloud-only
 - [Architecture](./docs/ARCHITECTURE.md) - System architecture overview
 - [Cloud vs OSS](./docs/CLOUD_VS_OSS.md) - Detailed comparison
+
+### Core Principles
+- **[Invariants](./docs/INVARIANTS.md)** - Financial correctness guarantees
+- **[Stack Agnosticity](./docs/STACK_AGNOSTICITY.md)** - Provider-agnostic design
+- **[OSS vs Enterprise Boundary](./docs/OSS_VS_ENTERPRISE_BOUNDARY.md)** - Clear boundaries
 
 ### SDK Documentation
 - [TypeScript/Node.js SDK](./packages/sdk/README.md) - API client documentation
@@ -143,7 +171,7 @@ settler-oss/
 ### Development
 - [Contributing Guide](./CONTRIBUTING.md) - How to contribute
 - [Product Boundaries](./PRODUCT_BOUNDARIES.md) - OSS vs Cloud boundaries
-- [Boundary Map](./docs/BOUNDARY_MAP.md) - Technical module classification
+- [Security Policy](./SECURITY.md) - Security and compliance
 
 ---
 
@@ -262,10 +290,13 @@ This repository is **MIT licensed** - see [LICENSE](./LICENSE) for details.
 ## 🌟 Show Your Support
 
 If you find Settler OSS useful:
-- ⭐ Star this repository
-- 🍴 Fork for your own use
-- 🐛 Report bugs or request features
-- 🤝 Contribute code or documentation
+- ⭐ **[Star this repository](https://github.com/shardie-github/settler-oss/stargazers)** - Help others discover Settler
+- 🍴 **[Fork it](https://github.com/shardie-github/settler-oss/fork)** - Build your own reconciliation system
+- 🐛 **[Report bugs](https://github.com/shardie-github/settler-oss/issues)** - Help us improve
+- 🤝 **[Contribute](./CONTRIBUTING.md)** - Code, docs, or examples welcome
+- 💬 **[Join Discussions](https://github.com/shardie-github/settler-oss/discussions)** - Share use cases and learnings
+
+**Why star?** Stars help finance teams and developers discover trustworthy reconciliation tools. Your star matters!
 
 ---
 
