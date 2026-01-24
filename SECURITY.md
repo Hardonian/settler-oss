@@ -271,10 +271,13 @@ We maintain a list of known vulnerabilities and their status:
 ## 🛠️ Compliance & Certifications
 
 ### Enterprise (Cloud)
-- **SOC 2 Type II:** Annual audit (Enterprise tier)
-- **PCI DSS:** Level 1 Service Provider (payment data handling)
-- **GDPR:** EU data residency options, data processing agreements
+- **SOC 2 Type II:** Annual audit available (Enterprise tier)
+- **GDPR:** EU data residency options, data processing agreements available
 - **ISO 27001:** Information security management (in progress)
+
+**Payment Card Data:**
+- Settler does not store payment card data
+- For PCI DSS requirements, contact sales for compliance documentation
 
 ### OSS
 - **No compliance guarantees:** OSS is provided "as is" (MIT license)

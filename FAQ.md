@@ -222,7 +222,18 @@ See [SECURITY.md](./SECURITY.md) for details.
 
 ### Is my data secure?
 
-Yes! We use industry-standard encryption and security practices. See our [security documentation](https://docs.settler.dev/security) for details.
+Settler implements encryption in transit (TLS 1.3) and secure SDK practices. Security responsibilities are clearly defined in [SECURITY.md](./SECURITY.md) and [THREAT_MODEL.md](./docs/THREAT_MODEL.md).
+
+**OSS (Self-Hosted):**
+- You control data (never leaves your infrastructure)
+- You are responsible for encryption at rest, access control, and infrastructure security
+
+**Cloud:**
+- Encryption in transit (TLS 1.3)
+- Encryption at rest (AES-256)
+- SOC 2 Type II compliance available (Enterprise tier)
+
+**Important:** Security depends on proper API key management, data validation, and infrastructure security. See [SECURITY.md](./SECURITY.md) for your responsibilities.
 
 ## Support
 
