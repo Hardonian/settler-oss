@@ -1,0 +1,50 @@
+{
+  "$id": "https://settler.dev/schemas/normalized-record.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NormalizedRecord",
+  "description": "Canonical normalized record for deterministic reconciliation kernels.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "source",
+    "timestamp",
+    "amount_minor_units",
+    "currency",
+    "attributes",
+    "schema_version"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Stable record identifier."
+    },
+    "source": {
+      "type": "string",
+      "description": "Source system identifier."
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "RFC3339 timestamp or explicit date in UTC."
+    },
+    "amount_minor_units": {
+      "type": "integer",
+      "description": "Amount in minor units (integer, deterministic)."
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code."
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Additional attributes with stable key ordering rules.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version identifier."
+    }
+  }
+}

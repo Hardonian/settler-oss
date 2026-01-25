@@ -1,0 +1,61 @@
+{
+  "$id": "https://settler.dev/schemas/ruleset.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ruleset",
+  "description": "Deterministic matching and comparison rules for reconciliation kernels.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "match_keys",
+    "compare_keys",
+    "tolerance_minor_units",
+    "rounding",
+    "timezone",
+    "schema_version"
+  ],
+  "properties": {
+    "match_keys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keys used to build deterministic match groups."
+    },
+    "compare_keys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keys compared for variance detection."
+    },
+    "tolerance_minor_units": {
+      "type": "integer",
+      "description": "Allowed variance in minor units after rounding."
+    },
+    "rounding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "increment_minor_units"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["down", "up", "nearest", "toward_zero", "away_from_zero"],
+          "description": "Explicit rounding mode."
+        },
+        "increment_minor_units": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Rounding increment in minor units."
+        }
+      }
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Timezone rule applied prior to reconciliation (e.g., UTC)."
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version identifier."
+    }
+  }
+}

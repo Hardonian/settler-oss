@@ -12,6 +12,7 @@ coverage/
 build/
 dist/
 *.tsbuildinfo
+target/
 
 # Environment variables
 .env
@@ -47,6 +48,7 @@ tmp/
 temp/
 *.tmp
 tools/settler-engine/fixtures/**/out/
+crates/**/pkg/
 
 # Mirror export (if running locally)
 .mirror-out/
