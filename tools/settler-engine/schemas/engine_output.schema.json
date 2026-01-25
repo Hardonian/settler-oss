@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Settler Engine Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tool_version",
+    "normalization_summary",
+    "variance_summary",
+    "variance_items_path",
+    "evidence_manifest",
+    "deterministic_statement"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "tool_version": { "type": "string" },
+    "normalization_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["records_processed", "records_skipped", "warnings"],
+      "properties": {
+        "records_processed": { "type": "integer" },
+        "records_skipped": { "type": "integer" },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "variance_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "counts_by_type"],
+      "properties": {
+        "total": { "type": "integer" },
+        "counts_by_type": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        }
+      }
+    },
+    "variance_items_path": { "type": "string" },
+    "evidence_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generated_at", "tool_version", "schema_version", "files"],
+      "properties": {
+        "generated_at": { "type": "string" },
+        "tool_version": { "type": "string" },
+        "schema_version": { "type": "string" },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "sha256", "bytes"],
+            "properties": {
+              "path": { "type": "string" },
+              "sha256": { "type": "string" },
+              "bytes": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "deterministic_statement": { "type": "string" }
+  }
+}

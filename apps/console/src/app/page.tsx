@@ -17,6 +17,24 @@ export default function ConsoleHome() {
         <li>SSO configuration</li>
         <li>Enterprise connectors</li>
       </ul>
+      <section style={{ marginTop: '2rem' }}>
+        <h2>Settler Engine (OSS-first)</h2>
+        <p style={{ color: '#666' }}>
+          Run reconciliation locally and import results without server
+          dependency. These flows surface discrepancies only.
+        </p>
+        <ul style={{ marginTop: '1rem', paddingLeft: '2rem' }}>
+          <li>
+            <a href="/engine/create-run-pack">Create Run Pack</a>
+          </li>
+          <li>
+            <a href="/engine/import-results">Import Results</a>
+          </li>
+          <li>
+            <a href="/engine/view-variances">View Variances</a>
+          </li>
+        </ul>
+      </section>
     </main>
   );
 }

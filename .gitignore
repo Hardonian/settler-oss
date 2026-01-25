@@ -46,6 +46,7 @@ lerna-debug.log*
 tmp/
 temp/
 *.tmp
+tools/settler-engine/fixtures/**/out/
 
 # Mirror export (if running locally)
 .mirror-out/

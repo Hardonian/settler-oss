@@ -16,7 +16,7 @@
 
 ## What is Settler OSS?
 
-Settler OSS provides **open-source client SDKs, protocol types, and development tools** for building financial reconciliation workflows. This repository contains the building blocks for integrating with Settler Cloud or building your own reconciliation system.
+Settler OSS provides **open-source client SDKs, protocol types, and development tools** for building financial reconciliation workflows. This repository contains everything needed to run reconciliation locally and integrate with optional hosted support offerings. Settler OSS is the primary distribution; enterprise hosting and support are optional and do not change the core reconciliation logic.
 
 > **Important for Finance Teams & Auditors:**
 > Settler is a **matching tool**, not an accounting system or compliance solution. It compares datasets and identifies matches/discrepancies. You remain responsible for data quality, financial decisions, regulatory compliance, and human review of results. See [ADVERSARIAL_FAQ.md](./docs/ADVERSARIAL_FAQ.md) for critical questions and [AUDIT_READINESS.md](./docs/AUDIT_READINESS.md) for audit integration guidance.
@@ -26,13 +26,13 @@ Settler OSS provides **open-source client SDKs, protocol types, and development 
 - **TypeScript/Node.js SDK** - HTTP client for Settler Cloud APIs
 - **Protocol Types** - Type-safe interfaces for reconciliation workflows
 - **CLI Tool** - Command-line tool for local development and testing
+- **Settler Engine** - Deterministic reconciliation sidecar for local and CI runs
 - **React Components** (coming soon) - UI components for reconciliation interfaces
 - **Documentation & Examples** - Code samples and integration guides
 
 ### What's NOT Included (Cloud-Only)
 
 This repository does **NOT** include:
-- ❌ Reconciliation engine (proprietary, cloud-hosted)
 - ❌ Managed adapters for providers like Stripe, Shopify, QuickBooks (cloud-only)
 - ❌ Developer console/dashboard (cloud-only)
 - ❌ Webhook delivery infrastructure (cloud-only)
@@ -59,7 +59,7 @@ This runs a sample reconciliation showing matched and unmatched transactions.
 
 ---
 
-### Option 2: Use Settler Cloud (Recommended for Production)
+### Option 2: Use Settler Cloud (Optional Hosting & Support)
 
 Sign up for Settler Cloud to get:
 - ✅ Managed reconciliation engine with advanced matching

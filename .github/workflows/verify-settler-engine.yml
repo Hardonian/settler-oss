@@ -1,0 +1,23 @@
+name: Verify Settler Engine
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      - name: Run fixture verification
+        run: |
+          go test ./...
+        working-directory: tools/settler-engine
+      - name: Run engine fixture
+        run: |
+          INPUT_PATH="$(pwd)/tools/settler-engine/fixtures/basic/engine_input.json"
+          go -C tools/settler-engine run . -input "$INPUT_PATH"
+          test -f tools/settler-engine/fixtures/basic/out/engine_output.json

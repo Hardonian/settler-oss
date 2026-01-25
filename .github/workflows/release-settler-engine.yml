@@ -1,0 +1,55 @@
+name: Release Settler Engine
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - goos: linux
+            goarch: amd64
+            ext: ''
+          - goos: linux
+            goarch: arm64
+            ext: ''
+          - goos: darwin
+            goarch: amd64
+            ext: ''
+          - goos: darwin
+            goarch: arm64
+            ext: ''
+          - goos: windows
+            goarch: amd64
+            ext: '.exe'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      - name: Build
+        run: |
+          mkdir -p dist
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go -C tools/settler-engine build -o ../dist/settler-engine-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.ext }} .
+      - name: Generate checksum
+        run: |
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          binary = Path('dist') / f"settler-engine-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.ext }}"
+          data = binary.read_bytes()
+          digest = hashlib.sha256(data).hexdigest()
+          checksum_path = binary.with_suffix(binary.suffix + '.sha256')
+          checksum_path.write_text(f"{digest}  {binary.name}\n")
+          PY
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: settler-engine-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: dist/*

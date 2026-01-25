@@ -1,0 +1,5 @@
+[
+  {"transaction_id": "1", "amount": "100.00", "currency": "USD", "timestamp": "2024-01-01T00:00:00Z", "account": "acct-2"},
+  {"transaction_id": "2", "amount": "50.24", "currency": "USD", "timestamp": "2024-01-02T00:00:00Z", "account": "acct-2"},
+  {"transaction_id": "4", "amount": "12.00", "currency": "USD", "timestamp": "2024-01-04T00:00:00Z", "account": "acct-2"}
+]
