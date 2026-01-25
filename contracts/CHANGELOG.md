@@ -24,3 +24,11 @@ This file tracks changes to the Settler Protocol contract surface. All changes m
 - OpenAPI 3.0 specification
 - JSON Schema definitions for all core types
 - TypeScript type definitions (generated from schema)
+
+## 1.1.0 (Deterministic Kernel Contracts)
+
+### Added
+- NormalizedRecord schema for deterministic kernel inputs
+- Ruleset schema for deterministic matching and comparison
+- VarianceReport schema for deterministic variance outputs
+- EvidenceManifest schema for verification bundles

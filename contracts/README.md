@@ -14,6 +14,10 @@ contracts/
 │   ├── reconcile-request.json
 │   ├── reconcile-response.json
 │   ├── matching-rules.json
+│   ├── normalized-record.json
+│   ├── ruleset.json
+│   ├── variance-report.json
+│   ├── evidence-manifest.json
 │   ├── error-envelope.json
 │   ├── webhook-envelope.json
 │   └── health-response.json

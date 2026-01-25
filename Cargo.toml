@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+members = [
+  "crates/settler-kernel",
+  "crates/settler-verify-wasm",
+]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/settler-oss/settler"
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+thiserror = "1.0"

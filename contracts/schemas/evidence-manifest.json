@@ -1,0 +1,77 @@
+{
+  "$id": "https://settler.dev/schemas/evidence-manifest.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EvidenceManifest",
+  "description": "Evidence manifest for deterministic verification of reconciliation outputs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kernel_version",
+    "inputs",
+    "ruleset",
+    "outputs",
+    "deterministic_statement"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version identifier."
+    },
+    "kernel_version": {
+      "type": "string",
+      "description": "Kernel version used to compute variances."
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["left_records", "right_records"],
+      "properties": {
+        "left_records": {
+          "$ref": "#/definitions/fileHash"
+        },
+        "right_records": {
+          "$ref": "#/definitions/fileHash"
+        }
+      }
+    },
+    "ruleset": {
+      "$ref": "#/definitions/fileHash"
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variance_report", "variance_summary_hash"],
+      "properties": {
+        "variance_report": {
+          "$ref": "#/definitions/fileHash"
+        },
+        "variance_summary_hash": {
+          "type": "string",
+          "description": "Hash of the variance list for deterministic verification."
+        }
+      }
+    },
+    "deterministic_statement": {
+      "type": "string",
+      "description": "Statement describing deterministic processing and scope."
+    }
+  },
+  "definitions": {
+    "fileHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file_name", "sha256"],
+      "properties": {
+        "file_name": {
+          "type": "string",
+          "description": "Filename referenced by this manifest entry."
+        },
+        "sha256": {
+          "type": "string",
+          "description": "SHA-256 hex digest of the file contents."
+        }
+      }
+    }
+  }
+}

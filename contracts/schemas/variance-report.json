@@ -1,0 +1,64 @@
+{
+  "$id": "https://settler.dev/schemas/variance-report.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VarianceReport",
+  "description": "Deterministic variances surfaced by reconciliation kernel.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "variances", "summary_hash"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version identifier."
+    },
+    "variances": {
+      "type": "array",
+      "description": "Stable-ordered list of variances.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "variance_id",
+          "variance_type",
+          "severity",
+          "left_record_id",
+          "right_record_id",
+          "amount_delta_minor_units",
+          "rationale"
+        ],
+        "properties": {
+          "variance_id": {
+            "type": "string",
+            "description": "Deterministic variance identifier."
+          },
+          "variance_type": {
+            "type": "string",
+            "description": "Variance classification (e.g., missing_right, amount_mismatch)."
+          },
+          "severity": {
+            "type": "string",
+            "description": "Severity classification for review."
+          },
+          "left_record_id": {
+            "type": ["string", "null"]
+          },
+          "right_record_id": {
+            "type": ["string", "null"]
+          },
+          "amount_delta_minor_units": {
+            "type": "integer",
+            "description": "Amount delta in minor units."
+          },
+          "rationale": {
+            "type": "string",
+            "description": "Reason for variance; surfaces discrepancies only."
+          }
+        }
+      }
+    },
+    "summary_hash": {
+      "type": "string",
+      "description": "Hash of the variance list for deterministic verification."
+    }
+  }
+}
