@@ -14,9 +14,9 @@ The Settler OSS repository provides **client-side tools, protocol specifications
 1. **Integrate** with the Settler Cloud API
 2. **Build** custom reconciliation workflows using our protocol
 3. **Extend** the ecosystem with adapters, UI components, and examples
-4. **Self-host** basic reconciliation logic (if they implement their own engine)
+4. **Self-host** deterministic reconciliation runs with the Settler Engine sidecar
 
-**What OSS is NOT:** A complete, production-ready reconciliation platform. The reconciliation engine, managed adapters, and infrastructure remain proprietary.
+**What OSS is NOT:** A complete, production-ready reconciliation platform. Managed reconciliation infrastructure, hosted adapters, and enterprise orchestration remain proprietary.
 
 ---
 
@@ -96,7 +96,27 @@ The Settler OSS repository provides **client-side tools, protocol specifications
 
 ---
 
-### 4. React Components (`packages/react-settler`)
+### 4. Settler Engine (`tools/settler-engine`)
+
+**Purpose:** Deterministic sidecar that surfaces discrepancies in local and CI contexts
+
+**Includes:**
+- Schema-first input/output contracts
+- CSV/JSON normalization into canonical records
+- Deterministic variance computation with stable ordering
+- Evidence bundle output (manifest, normalized records, variances)
+
+**Excludes:**
+- Hosted execution infrastructure
+- Managed adapters or data ingestion pipelines
+- Enterprise workflow orchestration
+
+**License:** MIT
+**Rationale:** Provide OSS-first deterministic reconciliation runs without requiring hosted services
+
+---
+
+### 5. React Components (`packages/react-settler`)
 
 **Purpose:** UI components for building reconciliation interfaces
 

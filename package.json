@@ -18,7 +18,8 @@
     "clean": "npm run clean --workspaces --if-present && rm -rf node_modules",
     "release:check": "npm run lint && npm run typecheck && npm run test && npm run build && npm run check-boundaries",
     "doctor": "npm run build && echo '\n✅ All packages built successfully!\n'",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "settler:run": "node scripts/settler-engine.mjs"
   },
   "repository": {
     "type": "git",
