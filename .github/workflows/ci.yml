@@ -6,7 +6,9 @@ on:
   pull_request:
     branches: [main]
 
-# Skip CI on auto-sync commits to avoid duplicate runs
+permissions:
+  contents: read
+
 jobs:
   check-skip:
     runs-on: ubuntu-latest
@@ -23,239 +25,75 @@ jobs:
             echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
-  lint:
+  quality-gates:
     if: needs.check-skip.outputs.skip != 'true'
     needs: check-skip
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Use Node.js
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: 'npm'
-      
       - name: Install dependencies
         run: npm ci
-      
-      - name: Run linter
+      - name: Run lint
         run: npm run lint
-        continue-on-error: true
-      
+      - name: Run typecheck
+        run: npm run typecheck
+      - name: Run tests
+        run: npm test
+      - name: Run build
+        run: npm run build
       - name: Check boundaries
         run: npm run check-boundaries
-      
-      - name: Check for secret leaks
-        run: npm run secret-leak:check
-
-  contracts:
-    if: needs.check-skip.outputs.skip != 'true'
-    needs: check-skip
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
       - name: Validate contracts
         run: npm run contracts:check
 
-  typecheck:
+  docs-reality-gates:
     if: needs.check-skip.outputs.skip != 'true'
     needs: check-skip
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Use Node.js
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: 'npm'
-      
       - name: Install dependencies
         run: npm ci
-      
-      - name: Run typecheck
-        run: npm run typecheck
-        continue-on-error: true
+      - name: Verify docs
+        run: npm run docs:verify
 
-  build:
+  security-gates:
     if: needs.check-skip.outputs.skip != 'true'
     needs: check-skip
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    
+    permissions:
+      contents: read
+      security-events: write
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2.3.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '20.x'
           cache: 'npm'
-      
       - name: Install dependencies
         run: npm ci
-      
-      - name: Build all packages
-        run: npm run build
-        continue-on-error: true
-      
-      - name: Build Protocol package
-        working-directory: packages/protocol
-        run: |
-          if [ -f "package.json" ]; then
-            npm run build || echo "Protocol build skipped"
-          fi
-        continue-on-error: true
-      
-      - name: Build Shared package
-        working-directory: packages/shared
-        run: |
-          if [ -f "package.json" ]; then
-            npm run build || echo "Shared build skipped"
-          fi
-        continue-on-error: true
-      
-      - name: Build TypeScript SDK
-        working-directory: packages/sdk
-        run: |
-          if [ -f "package.json" ]; then
-            npm run build || echo "TypeScript SDK build skipped"
-          fi
-        continue-on-error: true
-      
-      - name: Build React SDK
-        working-directory: packages/react-settler
-        run: |
-          if [ -f "package.json" ]; then
-            npm run build || echo "React SDK build skipped"
-          fi
-        continue-on-error: true
-      
-      - name: Build CLI
-        working-directory: packages/cli
-        run: |
-          if [ -f "package.json" ]; then
-            npm run build || echo "CLI build skipped"
-          fi
-        continue-on-error: true
-      
-      - name: Build Web app
-        working-directory: apps/web
-        run: |
-          if [ -f "package.json" ]; then
-            npm run build || echo "Web app build skipped"
-          fi
-        continue-on-error: true
-
-  test-typescript:
-    if: needs.check-skip.outputs.skip != 'true'
-    needs: check-skip
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Run TypeScript SDK tests
-        working-directory: packages/sdk
-        run: |
-          if [ -f "package.json" ]; then
-            npm test || echo "TypeScript SDK tests skipped (no tests yet)"
-          else
-            echo "TypeScript SDK package.json not found"
-            exit 1
-          fi
-        continue-on-error: true
-
-  test-python:
-    if: needs.check-skip.outputs.skip != 'true'
-    needs: check-skip
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      
-      - name: Install dependencies
-        working-directory: packages/sdk-python
-        run: |
-          if [ -f "setup.py" ]; then
-            pip install -e . || echo "Python SDK setup skipped"
-            pip install pytest pytest-cov || echo "Test dependencies skipped"
-          else
-            echo "Python SDK not configured yet"
-          fi
-      
-      - name: Run tests
-        working-directory: packages/sdk-python
-        run: pytest || echo "Python tests skipped"
-
-  test-go:
-    if: needs.check-skip.outputs.skip != 'true'
-    needs: check-skip
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.21'
-      
-      - name: Run tests
-        working-directory: packages/sdk-go
-        run: |
-          if [ -f "go.mod" ]; then
-            go test ./... || echo "Go tests skipped"
-          else
-            echo "Go SDK not configured yet"
-          fi
-
-  test-ruby:
-    if: needs.check-skip.outputs.skip != 'true'
-    needs: check-skip
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-          bundler-cache: true
-      
-      - name: Run tests
-        working-directory: packages/sdk-ruby
-        run: |
-          if [ -f "settler-sdk.gemspec" ]; then
-            bundle exec rake test || echo "Ruby tests skipped"
-          else
-            echo "Ruby SDK not configured yet"
-          fi
+      - name: Dependency audit (production)
+        run: npm audit --audit-level=high --omit=dev
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3

@@ -1,363 +1,113 @@
 # Settler OSS
 
-<div align="center">
+- **Deterministic reconciliation tooling** for comparing datasets, surfacing variances, and producing audit-ready evidence bundles.
+- **Open-source SDKs and CLI** for integrating reconciliation into local workflows or CI.
+- **Local-first**: run the engine with fixtures in this repo, no hosted account required.
+- **Cloud optional**: hosted adapters and managed runs live outside this repo.
 
-[![CI](https://github.com/shardie-github/settler-oss/workflows/CI/badge.svg)](https://github.com/shardie-github/settler-oss/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+**Who this is for:** engineers and operators building reconciliation workflows who need a transparent, self-hostable baseline.
 
-**Open-source SDKs and tools for financial reconciliation**
-
-[Documentation](./docs) • [Quick Start](#quick-start) • [Discussions](https://github.com/shardie-github/settler-oss/discussions)
-
-</div>
+**Quick start:** follow [Quick Start](#quick-start) to run the engine on the included fixtures in a few minutes.
 
 ---
 
-## What is Settler OSS?
+## Why This Exists
 
-Settler OSS provides **open-source client SDKs, protocol types, and development tools** for building financial reconciliation workflows. This repository contains everything needed to run reconciliation locally and integrate with optional hosted support offerings. Settler OSS is the primary distribution; enterprise hosting and support are optional and do not change the core reconciliation logic.
+Financial reconciliation is often hidden behind opaque systems and manual spreadsheets. That makes audits slow, repeatability weak, and engineering teams dependent on vendor-specific logic. Settler OSS exists to provide a deterministic, inspectable baseline for reconciliation so teams can test locally, integrate in CI, and reason about results without vendor lock-in.
 
-> **Important for Finance Teams & Auditors:**
-> Settler is a **matching tool**, not an accounting system or compliance solution. It compares datasets and identifies matches/discrepancies. You remain responsible for data quality, financial decisions, regulatory compliance, and human review of results. See [ADVERSARIAL_FAQ.md](./docs/ADVERSARIAL_FAQ.md) for critical questions and [AUDIT_READINESS.md](./docs/AUDIT_READINESS.md) for audit integration guidance.
+## What This Project Is
 
-### What's Included (MIT Licensed)
+- An open-source toolkit that ships SDKs, protocol types, and a local reconciliation engine.
+- A monorepo for building and validating reconciliation workflows with deterministic outputs.
+- A foundation you can self-host, extend, or integrate with optional cloud services.
 
-- **TypeScript/Node.js SDK** - HTTP client for Settler Cloud APIs
-- **Protocol Types** - Type-safe interfaces for reconciliation workflows
-- **CLI Tool** - Command-line tool for local development and testing
-- **Settler Engine** - Deterministic reconciliation sidecar for local and CI runs
-- **React Components** (coming soon) - UI components for reconciliation interfaces
-- **Documentation & Examples** - Code samples and integration guides
+## What This Project Is NOT
 
-### What's NOT Included (Cloud-Only)
+- Not an accounting system, ledger, or compliance solution.
+- Not a hosted service by default (cloud is optional and separate).
+- Not a managed adapter library for third-party providers.
 
-This repository does **NOT** include:
-- ❌ Managed adapters for providers like Stripe, Shopify, QuickBooks (cloud-only)
-- ❌ Developer console/dashboard (cloud-only)
-- ❌ Webhook delivery infrastructure (cloud-only)
+## Where This Fits
 
-**See [OSS_SCOPE.md](./OSS_SCOPE.md) for complete details on what's open-source vs. cloud-only.**
+Settler OSS is the open-source layer in an open-core model:
 
----
+```
+Your system → Settler OSS SDK/CLI → (optional) Settler Cloud
+```
+
+- **Depends on:** Node.js tooling and the local engine binary (Go build) for engine runs.
+- **Used by:** application teams that need deterministic reconciliation runs and audit artifacts.
+
+## Core Capabilities
+
+- Deterministic reconciliation engine with fixture-based local runs.
+- SDKs and protocol types for modeling reconciliation inputs/outputs.
+- CLI and scripts for local execution and CI integration.
+- Documentation that defines invariants, guarantees, and boundaries.
 
 ## Quick Start
 
-Choose your integration path:
-
-### Option 1: Try the Demo
-
-See Settler's basic functionality locally:
+**Prerequisites:** Node.js 18+, Go 1.21+, and npm.
 
 ```bash
-npx @settler/cli demo
-```
-
-This runs a sample reconciliation showing matched and unmatched transactions.
-
-**[Full Quickstart Guide](./docs/QUICKSTART_10MIN.md)** - Step-by-step tutorial
-
----
-
-### Option 2: Use Settler Cloud (Optional Hosting & Support)
-
-Sign up for Settler Cloud to get:
-- ✅ Managed reconciliation engine with advanced matching
-- ✅ Pre-built adapters (Stripe, Shopify, QuickBooks, + 50 more)
-- ✅ Developer console and monitoring
-- ✅ Webhooks and scheduled jobs
-
-```bash
-npm install @settler/sdk
-```
-
-```typescript
-import { SettlerClient } from '@settler/sdk';
-
-const client = new SettlerClient({
-  apiKey: process.env.SETTLER_API_KEY, // Get from https://settler.dev
-});
-
-const result = await client.reconcile({
-  source: sourceTransactions,
-  target: targetTransactions,
-});
-
-console.log(`Matched: ${result.summary.matched}`);
-console.log(`Unmatched: ${result.summary.unmatchedSource}`);
-```
-
-**[Get Free API Key (100 transactions/month)](https://settler.dev)**
-
----
-
-### Option 3: Local Development & Testing
-
-Test reconciliation logic locally without a cloud account:
-
-```bash
-# Install CLI
-npm install -g @settler/cli
-
-# Run demo
-settler demo
-
-# Reconcile your own CSV files
-settler reconcile --source payments.csv --target invoices.csv
-```
-
-**Local CLI features:**
-- ✅ Works offline (no cloud needed)
-- ✅ Exact matching algorithm
-- ✅ CSV import/export
-- ⚠️ No fuzzy matching or advanced rules (use Cloud for production)
-
----
-
-## Repository Structure
-
-```
-settler-oss/
-├── packages/
-│   ├── sdk/              TypeScript/Node.js SDK (MIT)
-│   ├── protocol/         Protocol types and specifications (MIT)
-│   ├── cli/              Command-line tool (MIT)
-│   ├── shared/           Shared utilities (MIT)
-│   ├── react-settler/    React components (MIT, coming soon)
-│   └── enterprise/       Enterprise features (proprietary)
-├── apps/
-│   ├── web/              Marketing site + docs (MIT)
-│   └── console/          Developer console (proprietary)
-└── docs/                 Documentation (MIT)
-```
-
----
-
-## Use Cases
-
-### What You Can Build with OSS
-
-✅ **Custom Reconciliation Logic** - Build your own matching engine  
-✅ **Local Development & Testing** - Test reconciliation workflows locally  
-✅ **Custom Adapters** - Connect to proprietary systems  
-✅ **UI Integration** - Build reconciliation interfaces with React components  
-✅ **Self-Hosted Solutions** - Run on your own infrastructure  
-
-### What Cloud Provides
-
-✅ **Managed Infrastructure** - No servers to maintain  
-✅ **Pre-Built Adapters** - 50+ providers (Stripe, Shopify, QuickBooks, etc.)  
-✅ **Advanced Matching** - Fuzzy matching, tolerance bands, ML-assisted  
-✅ **Webhooks & Scheduling** - Real-time notifications and automated jobs  
-✅ **Developer Console** - Monitoring, logs, exception handling  
-
----
-
-## Documentation
-
-**[📚 Full Documentation Index](./docs/INDEX.md)** - Complete organized index of all documentation
-
-### Getting Started
-- **[⚡ 10-Minute Quickstart](./docs/QUICKSTART_10MIN.md)** - Reconcile your first dataset
-- [OSS Scope](./OSS_SCOPE.md) - What's open-source vs. cloud-only
-- [Architecture](./docs/ARCHITECTURE.md) - System architecture overview
-- [Cloud vs OSS](./docs/CLOUD_VS_OSS.md) - Detailed comparison
-
-### Core Principles & Trust Framework
-- **[Guarantees](./docs/GUARANTEES.md)** - What Settler guarantees vs. explicit non-guarantees
-- **[Threat Model](./docs/THREAT_MODEL.md)** - Security boundaries and responsibilities
-- **[Determinism](./docs/DETERMINISM.md)** - Deterministic behavior specification
-- **[Invariants](./docs/INVARIANTS.md)** - Financial correctness requirements
-- **[Stack Agnosticity](./docs/STACK_AGNOSTICITY.md)** - Provider-agnostic design
-- **[OSS vs Enterprise Boundary](./docs/OSS_VS_ENTERPRISE_BOUNDARY.md)** - Clear boundaries
-
-### External Review & Institutional Use
-- **[Adversarial FAQ](./docs/ADVERSARIAL_FAQ.md)** - Hard questions from auditors and CFOs
-- **[Audit Readiness](./docs/AUDIT_READINESS.md)** - Using Settler in financial audits
-- **[Long-Term Support](./docs/LONG_TERM_SUPPORT.md)** - Compatibility and support policy
-
-### Project Health & Release
-- **[OSS Audit Rubric](./docs/OSS_AUDIT_RUBRIC.md)** - Release readiness scoring framework
-- **[Pre-Launch Checklist](./docs/PRE_LAUNCH_CHECKLIST.md)** - Pre-release verification checklist
-- **[Five Year Survivability](./docs/FIVE_YEAR_SURVIVABILITY.md)** - Long-term viability assessment
-- **[Governance](./GOVERNANCE.md)** - Decision-making and maintainer process
-- **[Releasing](./docs/RELEASING.md)** - Release process guide
-- **[Repository Map](./docs/REPO_MAP.md)** - Codebase navigation guide
-
-### SDK Documentation
-- [TypeScript/Node.js SDK](./packages/sdk/README.md) - API client documentation
-- [Protocol Types](./packages/protocol/README.md) - Type definitions
-- [CLI Tool](./packages/cli/README.md) - Command-line interface
-
-### Development
-- [Contributing Guide](./CONTRIBUTING.md) - How to contribute
-- [Product Boundaries](./PRODUCT_BOUNDARIES.md) - OSS vs Cloud boundaries
-- [Security Policy](./SECURITY.md) - Security and compliance
-
----
-
-## Development
-
-This is a monorepo managed with npm workspaces (or pnpm).
-
-```bash
-# Install dependencies
 npm install
-# or: pnpm install
-
-# Build all packages
-npm run build
-
-# Lint all packages
-npm run lint
-
-# Run tests
-npm run test
-
-# Check boundaries (ensure OSS doesn't import proprietary code)
-npm run check-boundaries
+npm run settler:run -- --input tools/settler-engine/fixtures/basic/engine_input.json
 ```
 
----
+**Success signal:** the command prints `Run complete.` plus a variance total and output paths.
+
+Need a longer walkthrough? See [docs/engine/QUICKSTART.md](./docs/engine/QUICKSTART.md).
+
+## Architecture Overview
+
+Key directories:
+
+- `packages/` — SDKs, shared utilities, and protocol definitions.
+- `tools/settler-engine/` — Go-based reconciliation engine and fixtures.
+- `apps/` — UI apps and console tooling.
+- `docs/` — guarantees, invariants, and operational guidance.
+
+High-level flow:
+
+1. Define inputs and ruleset (fixtures or your own data).
+2. Run the engine locally to produce deterministic outputs.
+3. Consume output in your own system or optional UI tooling.
+
+## Extending the Project
+
+- Add new SDKs or packages under `packages/` and wire them into workspace scripts.
+- Preserve protocol invariants defined in `packages/protocol` and docs.
+- Run `npm run check-boundaries` to ensure OSS/cloud separation stays intact.
+- Update docs alongside behavioral changes.
+
+Common pitfalls:
+
+- Shipping cloud-only behavior inside OSS packages.
+- Changing protocol types without updating fixtures and docs.
+- Skipping deterministic output validation.
+
+## Failure & Degradation Model
+
+- Engine and CLI commands exit non-zero on invalid inputs or build failures.
+- Local runs do not require network access unless you call cloud APIs explicitly.
+- Outputs are written to a target directory for inspection; nothing is auto-deployed.
+
+## Security & Safety Considerations
+
+- Treat API keys as secrets and load them via environment variables.
+- Use test data when iterating on reconciliation rules.
+- Review `docs/THREAT_MODEL.md` and `docs/INVARIANTS.md` before production use.
 
 ## Contributing
 
-Settler OSS welcomes contributions that align with project goals and maintainer capacity.
+We welcome focused contributions that improve stability, documentation, and real-world usability.
 
-### What We're Looking For
+- Read [CONTRIBUTING.md](./CONTRIBUTING.md) for workflow and expectations.
+- Use Discussions for open-ended questions and design proposals.
+- Run `npm run verify` before submitting a PR.
 
-**High-value contributions:**
-- Bug fixes with clear reproduction steps
-- Documentation improvements (typos, clarity, examples)
-- Test coverage improvements
-- CLI and SDK enhancements (with prior discussion)
-- Good first issues (labeled `good-first-issue`)
+## License & Governance
 
-**Contributions requiring discussion first:**
-- New features (open feature request issue first)
-- Breaking API changes (rarely accepted)
-- New language SDKs (coordinate with maintainers)
-- Large refactors (stability over churn)
-
-### What Will Not Be Accepted
-
-**Out of scope:**
-- Features that belong in Cloud/Enterprise (see OSS_SCOPE.md)
-- Large architectural changes without maintainer buy-in
-- Features serving narrow use cases
-- Code that increases maintenance burden significantly
-- PRs without tests or documentation
-
-### How to Help Without Coding
-
-- Answer questions in GitHub Discussions
-- Report bugs with reproduction steps
-- Improve documentation and examples
-- Test beta releases and provide feedback
-- Help triage issues (add context, reproduce bugs)
-
-**Read [CONTRIBUTING.md](./CONTRIBUTING.md) for complete guidelines and [MAINTAINER_RESPONSE_POLICY.md](./docs/MAINTAINER_RESPONSE_POLICY.md) for response expectations.**
-
----
-
-## Comparison: OSS vs Cloud
-
-| Feature | OSS (This Repo) | Cloud (SaaS) |
-|---------|-----------------|--------------|
-| **Client SDKs** | ✅ Full (TypeScript/Node.js) | ✅ Full |
-| **Protocol Types** | ✅ Full | ✅ Full |
-| **CLI Tool** | ✅ Full | ✅ Full |
-| **React Components** | 🚧 Coming Soon | ✅ Full |
-| **Reconciliation Engine** | ⚠️ Basic (demo only) | ✅ Production-ready |
-| **Managed Adapters** | ❌ None | ✅ 50+ providers |
-| **Developer Console** | ❌ None | ✅ Full |
-| **Webhooks** | ❌ None | ✅ Full |
-| **Scheduled Jobs** | ❌ None | ✅ Full |
-| **Support** | Community | 24/7 Dedicated (Enterprise) |
-| **Pricing** | Free (MIT) | Free tier + Paid tiers |
-
-**Full comparison:** [docs/CLOUD_VS_OSS.md](./docs/CLOUD_VS_OSS.md)
-
----
-
-## Architecture
-
-Settler uses an "open core" model:
-
-- **Open-Source (this repo):** Client libraries, protocol specs, CLI tools
-- **Cloud (proprietary):** Reconciliation engine, managed adapters, infrastructure
-
-```
-┌─────────────────────────────────────┐
-│   Your Application                  │
-└──────────┬──────────────────────────┘
-           │
-           │ uses SDK (OSS)
-           │
-┌──────────▼──────────────────────────┐
-│   Settler SDK (@settler/sdk)        │  ← You are here (OSS)
-└──────────┬──────────────────────────┘
-           │
-           │ HTTP/REST
-           │
-┌──────────▼──────────────────────────┐
-│   Settler Cloud Platform            │  ← Optional (SaaS)
-│   • Reconciliation Engine           │
-│   • Managed Adapters                │
-│   • Developer Console               │
-└─────────────────────────────────────┘
-```
-
-**See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) for details.**
-
----
-
-## Security
-
-Found a security vulnerability? Please email [security@settler.dev](mailto:security@settler.dev).
-
-**Do not** create a public GitHub issue for security vulnerabilities.
-
-See [SECURITY.md](./SECURITY.md) for our security policy.
-
----
-
-## License
-
-This repository is **MIT licensed** - see [LICENSE](./LICENSE) for details.
-
-- ✅ Free for commercial use
-- ✅ Modify and distribute freely
-- ✅ Use in proprietary software
-- ✅ Self-host without restrictions
-
-**Proprietary components** (`apps/console`, `packages/enterprise`) are clearly marked and have separate licenses.
-
----
-
-## Community & Support
-
-- **[Star this repository](https://github.com/shardie-github/settler-oss/stargazers)** - Increase project visibility
-- **[Fork it](https://github.com/shardie-github/settler-oss/fork)** - Build your own reconciliation system
-- **[Report bugs](https://github.com/shardie-github/settler-oss/issues)** - Help improve code quality
-- **[Contribute](./CONTRIBUTING.md)** - Code, documentation, or examples
-- **[Join Discussions](https://github.com/shardie-github/settler-oss/discussions)** - Technical questions and use cases
-
----
-
-## Links
-
-- **Documentation:** [./docs](./docs)
-- **Website:** [settler.dev](https://settler.dev) (Cloud platform)
-- **Discussions:** [GitHub Discussions](https://github.com/shardie-github/settler-oss/discussions)
-- **Issues:** [GitHub Issues](https://github.com/shardie-github/settler-oss/issues)
-
----
-
-<div align="center">
-
-**Settler OSS** - Open-source reconciliation toolkit
-
-[Star on GitHub](https://github.com/shardie-github/settler-oss/stargazers) • [Fork](https://github.com/shardie-github/settler-oss/fork) • [Discussions](https://github.com/shardie-github/settler-oss/discussions)
-
-</div>
+- MIT licensed (see [LICENSE](./LICENSE)).
+- Governance model in [GOVERNANCE.md](./GOVERNANCE.md).
+- Security reporting in [SECURITY.md](./SECURITY.md).

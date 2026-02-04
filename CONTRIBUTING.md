@@ -241,19 +241,9 @@ Help us reach more users:
    npm install
    ```
 
-4. **Build all packages**
+4. **Run quality gates**
    ```bash
-   npm run build
-   ```
-
-5. **Run tests**
-   ```bash
-   npm test
-   ```
-
-6. **Run linting**
-   ```bash
-   npm run lint
+   npm run verify
    ```
 
 ### Working on a Specific SDK
@@ -358,6 +348,9 @@ git checkout -b fix/bug-description
 ```bash
 # All tests
 npm test
+
+# Full verification (lint, typecheck, test, build, docs)
+npm run verify
 
 # Specific package
 cd packages/sdk && npm test
@@ -547,6 +540,15 @@ See [MAINTAINER_RESPONSE_POLICY.md](./docs/MAINTAINER_RESPONSE_POLICY.md) for de
 - Include reproduction steps and context
 
 **Response time:** Best effort when maintainer capacity allows.
+
+### Discussion Categories
+
+Use Discussions for collaborative or open-ended topics:
+
+- **Q&A:** usage help and troubleshooting
+- **Ideas:** feature proposals and UX feedback
+- **Show and tell:** integrations, demos, and community projects
+- **Design/architecture:** API shape, protocol evolution, and major changes
 
 ## Resources
 
