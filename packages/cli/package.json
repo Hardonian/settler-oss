@@ -20,7 +20,7 @@
   "author": "Scott Hardie",
   "license": "MIT",
   "dependencies": {
-    "commander": "^11.0.0"
+    "commander": "^14.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
