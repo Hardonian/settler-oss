@@ -8,13 +8,13 @@ We're here to help! Here are the best ways to get support for Settler.
 1. ✅ Check the [documentation](https://docs.settler.dev)
 2. ✅ Search [existing issues](https://github.com/shardie-github/settler-oss/issues)
 3. ✅ Check [Discussions](https://github.com/shardie-github/settler-oss/discussions) for similar questions
-4. ✅ Review the [FAQ](./FAQ.md)
+4. ✅ Review the [FAQ](../FAQ.md)
 
 ## 📚 Documentation
 
 - **[Full Documentation](https://docs.settler.dev)** - Complete guides and API reference
-- **[Getting Started Guide](./GETTING_STARTED.md)** - Step-by-step setup
-- **[Examples](./examples)** - Code examples and tutorials
+- **[Getting Started Guide](../GETTING_STARTED.md)** - Step-by-step setup
+- **[Examples](../examples)** - Code examples and tutorials
 - **[API Reference](https://docs.settler.dev/api)** - Complete API documentation
 
 ## 💬 Community Support

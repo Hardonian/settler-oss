@@ -102,12 +102,7 @@ We recognize and appreciate all contributions:
 
 ## 🚀 Events
 
-We occasionally host:
-- **Community Calls** - Regular meetups (TBD)
-- **Hackathons** - Coding events (TBD)
-- **Workshops** - Learning sessions (TBD)
-
-Stay tuned for announcements!
+When we schedule community calls, hackathons, or workshops, we announce them in GitHub Discussions. Subscribe there to get notified.
 
 ## 📝 Decision Making
 

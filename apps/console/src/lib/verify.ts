@@ -12,8 +12,17 @@ export async function verifyManifest(
   files: Record<string, Uint8Array>
 ): Promise<VerificationOutcome> {
   try {
+    if (typeof window === 'undefined') {
+      return {
+        ok: false,
+        errors: ['Verification is unavailable in this environment.'],
+        unavailable: true,
+      };
+    }
+
     const wasmModule = await import(
-      /* webpackIgnore: true */ '/wasm/settler_verify_wasm.js'
+      /* webpackIgnore: true */
+      new URL('/wasm/settler_verify_wasm.js', window.location.origin).toString()
     );
 
     if (typeof wasmModule.default === 'function') {
